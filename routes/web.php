@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// 引用控制器命名空间
+use App\Http\Controllers\Index;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Index::class, "index"]);
