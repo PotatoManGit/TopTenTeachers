@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 // 引用控制器命名空间
 use App\Http\Controllers\Index;
+use App\Http\Controllers\User\SignIn;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,4 @@ use App\Http\Controllers\Index;
 */
 
 Route::get('/', [Index::class, "index"]);
+Route::get('/user/sign_in/', [SignIn::class, "SignIn"]);

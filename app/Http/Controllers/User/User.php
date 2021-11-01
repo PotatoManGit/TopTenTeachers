@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 /**
- * Class SignIn
+ * Class User
  * @package App\Http\Controllers\User
- * 用户登录系统
+ * 用户操作系统
  */
 
-class SignIn extends Controller
+class User extends Controller
 {
-    public function SignIn()
+    public function User()
     {
-        return view('user/signIn');
+        return "Is In";
     }
 }
