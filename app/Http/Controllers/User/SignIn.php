@@ -15,6 +15,7 @@ class SignIn extends Controller
 {
     public function SignIn()
     {
+        setcookie("statues", "1", time()+60, '/');
         return view('user/signIn');
     }
 }

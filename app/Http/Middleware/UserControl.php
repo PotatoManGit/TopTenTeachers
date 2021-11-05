@@ -22,10 +22,17 @@ class UserControl
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->input('token') !== 'my-secret-token') {
-            return redirect('home');
+        if (empty($_COOKIE['statues']))
+        {
+            return redirect('/user/sign_in');
         }
-
-        return $next($request);
+        else if ($_COOKIE['statues'] == '1')
+        {
+            return $next($request); // 进入
+        }
+        else
+        {
+            return redirect('/user/sign_in');
+        }
     }
 }

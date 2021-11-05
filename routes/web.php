@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // 引用控制器命名空间
 use App\Http\Controllers\Index;
 use App\Http\Controllers\User\SignIn;
+use App\Http\Controllers\User\User;;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,8 @@ use App\Http\Controllers\User\SignIn;
 */
 
 Route::get('/', [Index::class, "index"]);
+
+// 用户相关路由
 Route::get('/user/sign_in/', [SignIn::class, "SignIn"]);
+Route::get('/user/', [User::class, "User"])
+    ->middleware('user_control');//Check cookie
