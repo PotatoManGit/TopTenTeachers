@@ -22,5 +22,6 @@ Route::get('/', [Index::class, "index"]);
 
 // 用户相关路由
 Route::get('/user/sign_in/', [SignIn::class, "SignIn"]);
+Route::post('/user/sign_in/check', [SignIn::class, "SignInCheck"]);
 Route::get('/user/', [User::class, "User"])
     ->middleware('user_control');//Check cookie

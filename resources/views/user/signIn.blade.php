@@ -13,7 +13,8 @@
 
     <center><div class="div_body_1">
             <br/><br/><br/>
-            <form action="/data/php/userControl/signIn.php" method="post">
+            <form action="/user/sign_in/check" method="post">
+                @csrf
                 <input type="text" name="username" class="formInputStyle_01"
                        required
                        pattern="[A-Za-z0-9]{7}" title="用户名输入格式错误，请检查后输入"

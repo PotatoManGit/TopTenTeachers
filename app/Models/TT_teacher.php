@@ -5,10 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TT_User extends Model
+/**
+ * Class TT_teacher
+ * @package App\Models
+ * 教师信息模型
+ */
+
+class TT_teacher extends Model
 {
     use HasFactory;
 
-    protected $table = "TT_Teacher";
+    protected $table = "TT_teacher";
     public $timestamps = false;
 }
