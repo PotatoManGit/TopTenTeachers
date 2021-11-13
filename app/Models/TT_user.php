@@ -16,11 +16,16 @@ class TT_user extends Model
     use HasFactory;
 
     protected $table = "TT_user";
-    public $timestamps = false;
+    protected $primaryKey = 'uid';
+    const UPDATED_AT = 'last_sign_in';
 
     public function GetUserPassword($username)
     {
-        $data = $this->select('SELECT * FROM `TT_user` WHERE `username` = ?', [$username]);
-        return $data;
+        return $this->where('username', $username)->first();
+    }
+
+    public function CheckCookie($uid)
+    {
+        return $this->where('uid', $uid)->value('password');
     }
 }
