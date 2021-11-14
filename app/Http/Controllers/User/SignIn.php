@@ -17,7 +17,7 @@ class SignIn extends Controller
 {
     public function SignIn()
     {
-        $check_result = "";
+        $check_result = "\n\n";
         return view('user/signIn', compact('check_result'));
     }
 
@@ -28,6 +28,7 @@ class SignIn extends Controller
 
         $db = new TT_user();
         $getData = $db->GetUserPassword($username);
+
         if($getData->password == $password)
         {
             // 加密操作
@@ -35,9 +36,13 @@ class SignIn extends Controller
             $U_password = Crypt::encryptString($getData->password);
 
             $coTime = time()+config('sjjs_userSystem.cookie_hold_time');
+            if($getData->type == 111)
+            {
+                $coTime = time()+3600;
+            }
             setcookie("tokenId", $U_uid, $coTime, '/');
             setcookie("token", $U_password, $coTime, '/');
-            redirect('/user/');
+            return redirect('/user/');
         }
         else
         {

@@ -3,8 +3,8 @@
 <html lang="zh">
 <head>
     <link rel="icon" href="https://www-potatost-user.oss-cn-hangzhou.aliyuncs.com/TopTenTeachers/logo.png">
-    <link rel="stylesheet" type="text/css" href="{{ asset("static/css/layout.css") }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset("static/css/input.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/layout.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("assets/css/form.css") }}">
 </head>
 <body class="Bg">
 
@@ -18,6 +18,7 @@
     </center>
 
 </div>
+
 
 @yield('content')
 

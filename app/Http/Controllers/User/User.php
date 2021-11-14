@@ -15,6 +15,6 @@ class User extends Controller
 {
     public function User()
     {
-        return "Is In";
+        return view('user/userEvaluation');
     }
 }

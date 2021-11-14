@@ -13,7 +13,7 @@
 
     <center><div class="div_body_1">
             <br/><br/><br/>
-            <form action="/user/sign_in/check" method="post">
+            <form action="{{ url('user/sign_in/check') }}" method="post">
                 @csrf
                 <input type="text" name="username" class="formInputStyle_01"
                        required
@@ -25,8 +25,7 @@
                        placeholder="密码"/>
 
 
-                <br/><br/><br/>
-                <p style="color: red">{{ $check_result }}</p>
+                <br/><p style="color: red">{{ $check_result }}</p><br/>
                 <div>
                     <button class="buttonStyle_01" type="submit" autofocus>登 录</button>
                 </div>
