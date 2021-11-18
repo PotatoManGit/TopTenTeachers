@@ -18,10 +18,14 @@ use App\Http\Controllers\User\User;;
 |
 */
 
-Route::get('/', [Index::class, "index"]);
+Route::any('/', [Index::class, "index"]);
 
 // 用户相关路由
-Route::get('/user/sign_in/', [SignIn::class, "SignIn"]);
+Route::any('/user/sign_in/', [SignIn::class, "SignIn"]);
 Route::post('/user/sign_in/check', [SignIn::class, "SignInCheck"]);
-Route::get('/user/', [User::class, "User"])
+Route::any('/user/', [User::class, "User"])
     ->middleware('user_control');//Check cookie
+
+Route::any('/test', function (){
+    return view('test');
+});
