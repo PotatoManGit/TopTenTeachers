@@ -7,27 +7,44 @@
     </head>
 
 
-    <div style="text-align: center">
-        <h1>登录</h1>
-    </div>
+    <center><h1>登录</h1></center>
 
-    <center><div class="div_body_1">
-            <br/><br/><br/>
+    <center><div style="margin-top: 2%">
             <form action="{{ url('user/sign_in/check') }}" method="post">
                 @csrf
-                <input type="text" name="username" class="formInputStyle_01"
-                       required
-                       pattern="[A-Za-z0-9]{7}" title="用户名输入格式错误，请检查后输入"
-                       placeholder="用户名"/><br/><br/>
-                <input type="password" name="password" class="formInputStyle_01"
-                       required
-                       pattern="[A-Za-z0-9]{7}" title="密码输入格式错误，请检查后输入"
-                       placeholder="密码"/>
+                <div class="input-group input-group-sm col-xs-4" style="margin-bottom: 1%">
+{{--                    <span class="input-group-addon" id="basic-addon1">用户名</span>--}}
+                    <input type="text" class="form-control" name="username"
+                           aria-describedby="basic-addon3" placeholder="用户名"
+                           required
+                           pattern="[A-Za-z0-9]{7}" title="用户名输入格式错误，请检查后输入">
+                </div>
+                <div class="input-group input-group-sm col-xs-4">
+{{--                    <span class="input-group-addon" id="basic-addon1">密&nbsp&nbsp&nbsp&nbsp码</span>--}}
+                    <input type="text" class="form-control" name="password"
+                           aria-describedby="basic-addon3" placeholder="密码"
+                           required
+                           pattern="[A-Za-z0-9]{7}" title="密码输入格式错误，请检查后输入">
+                </div>
+{{--                <input type="text" name="username" class="formInputStyle_01"--}}
+{{--                       required--}}
+{{--                       pattern="[A-Za-z0-9]{7}" title="用户名输入格式错误，请检查后输入"--}}
+{{--                       placeholder="用户名"/><br/><br/>--}}
+{{--                <input type="password" name="password" class="formInputStyle_01"--}}
+{{--                       required--}}
+{{--                       pattern="[A-Za-z0-9]{7}" title="密码输入格式错误，请检查后输入"--}}
+{{--                       placeholder="密码"/>--}}
 
 
-                <br/><p style="color: red">{{ $check_result }}</p><br/>
-                <div>
-                    <button class="buttonStyle_01" type="submit" autofocus>登 录</button>
+                @if ($check_result == 0)
+                    <div style="margin: 2%"></div>
+                @elseif ($check_result == 1)
+                    <br/>
+                    <div class="alert alert-danger" role="alert">用户名密码错误！</div>
+                @endif
+
+                <div class="btn-group" style="text-align: center;" role="group" aria-label="...">
+                    <button type="submit" class="btn btn-default">登录</button>
                 </div>
             </form>
         </div></center>

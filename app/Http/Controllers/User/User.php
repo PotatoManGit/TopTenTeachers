@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\User\UserEvaluation;
 
 /**
  * Class User
@@ -15,6 +16,9 @@ class User extends Controller
 {
     public function User()
     {
-        return view('user/userEvaluation');
+//        return view('user/userEvaluation');
+        // 暂时使用这个函数
+        $ev = new UserEvaluation();
+        return $ev->UserEvaluation();
     }
 }

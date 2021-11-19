@@ -17,7 +17,7 @@ class SignIn extends Controller
 {
     public function SignIn()
     {
-        $check_result = "\n\n";
+        $check_result = 0;
         return view('user/signIn', compact('check_result'));
     }
 
@@ -46,7 +46,7 @@ class SignIn extends Controller
         }
         else
         {
-            $check_result = '用户名或密码错误!';
+            $check_result = 1;
             return view('user/signIn', compact('check_result'));
         }
     }

@@ -9,6 +9,11 @@ class UserEvaluation extends Controller
 {
     public function UserEvaluation()
     {
-        return view('user/userEvaluation');
+        $teacherName = "";
+        $teacherType = "";
+        $tid = "";
+        $award = "";
+        return view('user/userEvaluation', compact('teacherName',
+            'teacherType', 'tid', 'award'));
     }
 }

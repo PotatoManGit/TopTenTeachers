@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+    <title>交大附中十佳教师评选</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -30,43 +30,45 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="/">交大附中十大教师评选系统</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+{{--                    <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>--}}
+                    <li><a href="/">首页</a></li>
+                    <li><a href="{{ url('user/') }}">评选者入口</a></li>
+                    <li><a href="{{ url('admin/') }}">管理者入口</a></li>
+                    <li><a href="{{ url('public/') }}">评选结果公布</a></li>
+{{--                    <li class="dropdown">--}}
+{{--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--}}
+{{--                        <ul class="dropdown-menu">--}}
+{{--                            <li><a href="#">Action</a></li>--}}
+{{--                            <li><a href="#">Another action</a></li>--}}
+{{--                            <li><a href="#">Something else here</a></li>--}}
+{{--                            <li role="separator" class="divider"></li>--}}
+{{--                            <li><a href="#">Separated link</a></li>--}}
+{{--                            <li role="separator" class="divider"></li>--}}
+{{--                            <li><a href="#">One more separated link</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
                 </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+{{--                <form class="navbar-form navbar-left">--}}
+{{--                    <div class="form-group">--}}
+{{--                        <input type="text" class="form-control" placeholder="Search">--}}
+{{--                    </div>--}}
+{{--                    <button type="submit" class="btn btn-default">Submit</button>--}}
+{{--                </form>--}}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
+                    <li><a href="{{ url('user/sign_in') }}">登录</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">关于 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
+                            <li><a href="#">使用文档</a></li>
+                            <li><a href="#">关于评选系统</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">联系作者</a></li>
                         </ul>
                     </li>
                 </ul>
