@@ -17,4 +17,10 @@ class TT_teacher extends Model
 
     protected $table = "TT_teacher";
     public $timestamps = false;
+    protected $primaryKey = 'tid';
+
+    public function GetAll()
+    {
+        return $this->get();
+    }
 }
