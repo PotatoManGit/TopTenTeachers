@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 // 引用控制器命名空间
 use App\Http\Controllers\Index;
 use App\Http\Controllers\User\SignIn;
-use App\Http\Controllers\User\User;;
+use App\Http\Controllers\User\User;
+use App\Http\Controllers\User\UserEvaluation;
+use App\Http\Controllers\Test;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,8 @@ Route::any('/user/sign_in/', [SignIn::class, "SignIn"]);
 Route::post('/user/sign_in/check', [SignIn::class, "SignInCheck"]);
 Route::any('/user/', [User::class, "User"])
     ->middleware('user_control');//Check cookie
+Route::any('user/evaluation/', [UserEvaluation::class, "UserEvaluation"])
+    ->middleware('user_control');
 
-Route::any('/test', function (){
-    return view('test');
-});
+
+Route::any('/test', [Test::class, "Test"]);

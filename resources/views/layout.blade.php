@@ -20,7 +20,7 @@
 <body>
 
 <div>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">交大附中十大教师评选系统</a>
+                <a class="navbar-brand" href="/">交大附中十佳教师评选系统</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

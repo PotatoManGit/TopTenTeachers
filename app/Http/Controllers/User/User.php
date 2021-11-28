@@ -16,9 +16,6 @@ class User extends Controller
 {
     public function User()
     {
-//        return view('user/userEvaluation');
-        // 暂时使用这个函数
-        $ev = new UserEvaluation();
-        return $ev->UserEvaluation();
+        return view('user/user');
     }
 }

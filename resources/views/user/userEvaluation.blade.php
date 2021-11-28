@@ -69,142 +69,60 @@
     </style>
 
     <div>
-        <form action="{{ url('user/sign_in/check') }}" method="post">
+        <form action="{{ url('user/evaluation/?award='.($awardId + 1)) }}" method="post">
             @csrf
-            <h1 style="text-align: center; color: black">最佳老师奖</h1>
+            <h1 style="text-align: center; color: black">{{ $awardName }}</h1>
             <p style="text-align: center;">请选择一位最适合这个称号的老师</p>
+            <input name="awardId" hidden value="{{ $awardId }}">
             <section>
-                <div class="divInLine">
-                    <legend>语文老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "语文")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <div class="divInLine">
-                    <legend>数学老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "数学")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <div class="divInLine">
-                    <legend>英语老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "英语")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <div class="divInLine">
-                    <legend>物理老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "物理")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <div class="divInLine">
-                    <legend>化学老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "化学")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <div class="divInLine">
-                    <legend>生物老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "生物")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <div class="divInLine">
-                    <legend>政治老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "政治")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <div class="divInLine">
-                    <legend>地理老师</legend>
-                    <ul>
-                        @foreach($data as $d)
-                            @if ($d["type"] == "地理")
-                                <li>
-                                    <label for="title_1">
-                                        <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                        {{ $d["name"] }}
-                                    </label>
-                                </li>
-                            @endif
-                        @endforeach()
-                    </ul>
-                </div>
-                <p>
-                    <label for="name">
-                        <span>其他老师: </span>
-                        <strong><abbr title="required">*</abbr></strong>
-                    </label>
-                    <input type="text" id="name" name="username">
-                </p>
+                @for($i = 1; $i <= config('sjjs_teacherSetting.teacherTypeNum'); $i++)
+                    <div class="divInLine">
+                        <legend>{{ config('sjjs_teacherSetting.teacherType'.$i)['typeName'] }}</legend>
+                        <ul>
+                            @foreach($data as $d)
+                                @if (in_array($d['type'], config('sjjs_teacherSetting.teacherType'.$i)['typeKey']))
+                                    <li>
+                                        <label for="title_1">
+                                            <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
+                                            {{ $d["name"] }}
+                                        </label>
+                                    </li>
+                                @endif
+                            @endforeach()
+                        </ul>
+                    </div>
+                @endfor
             </section>
-            <section>
-                <p> <button type="submit">提交</button> </p>
-            </section>
+            <div class="btn-group" role="group" aria-label="...">
+                @if ($status == 0)
+                    <div style="margin: 2%"></div>
+                @elseif ($status == 1)
+                    <br/>
+                    <div class="alert alert-danger" role="alert">请选择一个选项！</div>
+                @elseif ($status == 2)
+                    @if($teacherChose != 0)
+                        <div class="alert alert-info" role="alert">之前选择的是{{ $teacherChose }}老师，重新选择可改选</div>
+
+                    @endif
+                @endif
+
+                @if($awardId != 1)
+                    <section>
+                        <a href="{{ url('user/evaluation/?award='.($awardId - 1).'&status=back') }}"><p><button type="button" class="btn btn-default">上一个</button></p></a>
+                    </section>
+                @else
+                @endif
+
+                @if($awardId != config('sjjs_awardSetting.awardNum'))
+                    <section>
+                        <p> <button type="submit" class="btn btn-default">下一个</button> </p>
+                    </section>
+                @else
+                    <section>
+                        <p> <button type="submit" class="btn btn-default">提交</button> </p>
+                    </section>
+                @endif
+            </div>
         </form>
     </div>
 </head>

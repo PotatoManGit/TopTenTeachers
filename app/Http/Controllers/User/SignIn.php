@@ -29,13 +29,13 @@ class SignIn extends Controller
         $db = new TT_user();
         $getData = $db->GetUserPassword($username);
 
-        if($getData->password == $password)
+        if(!empty($getData->password) && $getData->password == $password)
         {
             // 加密操作
             $U_uid = Crypt::encryptString($getData->uid);
             $U_password = Crypt::encryptString($getData->password);
 
-            $coTime = time()+config('sjjs_userSystem.cookie_hold_time');
+            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_ignIn');
             if($getData->type == 111)
             {
                 $coTime = time()+3600;

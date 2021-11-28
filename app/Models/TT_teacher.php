@@ -23,4 +23,9 @@ class TT_teacher extends Model
     {
         return $this->get();
     }
+
+    public function GetByTid($tid)
+    {
+        return $this->where('tid', $tid)->value('name');
+    }
 }
