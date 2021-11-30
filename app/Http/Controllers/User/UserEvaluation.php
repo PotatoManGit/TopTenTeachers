@@ -44,15 +44,21 @@ class UserEvaluation extends Controller
         $db = new TT_teacher();
 
         if(!empty($_COOKIE['award'.$awardId]) && $status == 2)
-            $teacherChose = $db->GetByTid(Crypt::decryptString($_COOKIE['award'.$awardId]));
+        {
+            $tid = (int)Crypt::decryptString($_COOKIE['award' . $awardId]);
+            $teacherChose = $db->GetByTid($tid);
+        }
         else
-            $teacherChose = 0;
+        {
+            $tid = 0;
+            $teacherChose = '0';
+        }
 
         $awardName = config('sjjs_awardSetting.award'.$awardId);
         $data = $db->GetAll();
 //        return $data[1]->type;
         return view('user/userEvaluation', compact('data',
-            'awardId', 'awardName', 'status', 'teacherChose'));
+            'awardId', 'awardName', 'status', 'teacherChose', 'tid'));
     }
 
 }

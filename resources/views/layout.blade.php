@@ -7,6 +7,18 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>交大附中十佳教师评选</title>
 
+    <style type="text/css" >
+        .Bg {
+            background-image:
+                url("https://www-potatost-user.oss-cn-hangzhou.aliyuncs.com/TopTenTeachers/bg.webp");
+            background-attachment:fixed;
+            background-repeat:no-repeat;
+            background-size:cover;
+            -moz-background-size:cover;
+            -webkit-background-size:cover;
+        }
+    </style>
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
@@ -17,7 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body class="Bg">
 
 <div>
     <nav class="navbar navbar-inverse">

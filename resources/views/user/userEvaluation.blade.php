@@ -82,10 +82,19 @@
                             @foreach($data as $d)
                                 @if (in_array($d['type'], config('sjjs_teacherSetting.teacherType'.$i)['typeKey']))
                                     <li>
-                                        <label for="title_1">
-                                            <input type="radio" id="{{ $d["tid"] }}" name="choice" value="{{ $d["tid"] }}">
-                                            {{ $d["name"] }}
-                                        </label>
+                                        @if($status == 2 && $teacherChose != '0' && $d["tid"] == $tid)
+                                            <label for="title_1">
+                                                <input type="radio" id="{{ $d["tid"] }}" checked
+                                                       name="choice" value="{{ $d["tid"] }}">
+                                                {{ $d["name"] }}
+                                            </label>
+                                        @else
+                                            <label for="title_1">
+                                                <input type="radio" id="{{ $d["tid"] }}"
+                                                       name="choice" value="{{ $d["tid"] }}">
+                                                {{ $d["name"] }}
+                                            </label>
+                                        @endif
                                     </li>
                                 @endif
                             @endforeach()
@@ -100,15 +109,17 @@
                     <br/>
                     <div class="alert alert-danger" role="alert">请选择一个选项！</div>
                 @elseif ($status == 2)
-                    @if($teacherChose != 0)
-                        <div class="alert alert-info" role="alert">之前选择的是{{ $teacherChose }}老师，重新选择可改选</div>
-
+                    @if($teacherChose != '0')
+                        <div class="alert alert-info" role="alert">之前选择的是<strong>
+                                {{ $teacherChose }}</strong>老师，重新选择可改选</div>
+                    @else
                     @endif
                 @endif
 
                 @if($awardId != 1)
                     <section>
-                        <a href="{{ url('user/evaluation/?award='.($awardId - 1).'&status=back') }}"><p><button type="button" class="btn btn-default">上一个</button></p></a>
+                        <a href="{{ url('user/evaluation/?award='.($awardId - 1).'&status=back') }}">
+                            <p><button type="button" class="btn btn-default">上一个</button></p></a>
                     </section>
                 @else
                 @endif
