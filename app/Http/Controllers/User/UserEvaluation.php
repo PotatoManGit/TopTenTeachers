@@ -15,9 +15,9 @@ class UserEvaluation extends Controller
         {
             return $this->makeWeb(1, 0);
         }
-        elseif((int)$request['award'] == config('sjjs_awardSetting.awardNum'))
+        elseif(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
         {
-            return 'ok';
+            return redirect('/user/evaluation/check/?status=1');
         }
         elseif(!empty($request['status']) && $request['status'] == 'back')
         {
@@ -61,4 +61,36 @@ class UserEvaluation extends Controller
             'awardId', 'awardName', 'status', 'teacherChose', 'tid'));
     }
 
+    public function CheckEvaluationResult(Request $request)
+    {
+        if(empty($request['status']) || $request['status'] != '1')
+        {
+            return redirect('/user');
+        }
+        elseif($request['status'] == '1' || $request['status'] == '2')
+        {
+            $awardData = array();
+            $awardNum = config('sjjs_awardSetting.awardNum');
+            for($i = 1; $i <= $awardNum; $i++)
+            {
+                if(empty($_COOKIE['award'.$i]))
+                    $awardData[] = (int)Crypt::decryptString($_COOKIE['award'.$i]);
+                else
+                    $awardData[] = 0;
+            }
+
+            if($request['status'] == '1')
+            {
+                return view('user/checkEvaluationResult', compact($awardData));
+            }
+            else
+            {
+                return 'update';
+            }
+        }
+        else
+        {
+            return redirect('user/');
+        }
+    }
 }

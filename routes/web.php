@@ -29,6 +29,8 @@ Route::any('/user/', [User::class, "User"])
     ->middleware('user_control');//Check cookie
 Route::any('user/evaluation/', [UserEvaluation::class, "UserEvaluation"])
     ->middleware('user_control');
+Route::any('user/evaluation/check', [UserEvaluation::class,"CheckEvaluationResult"])
+    ->middleware('user_control');;
 
 
 Route::any('/test', [Test::class, "Test"]);
