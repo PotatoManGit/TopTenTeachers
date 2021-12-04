@@ -12,6 +12,6 @@ return[
     |
     */
 
-    'cookieHoldTime_signIn'=>300,
-    'cookieHoldTime_saveChoice'=>300,
+    'cookieHoldTime_signIn'=>600,
+    'cookieHoldTime_saveChoice'=>600,
 ];

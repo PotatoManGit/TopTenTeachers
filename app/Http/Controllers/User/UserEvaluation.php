@@ -15,11 +15,11 @@ class UserEvaluation extends Controller
         {
             return $this->makeWeb(1, 0);
         }
-        elseif(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
-        {
-            return redirect('/user/evaluation/check/?status=1');
-        }
-        elseif(!empty($request['status']) && $request['status'] == 'back')
+//        elseif(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
+//        {
+//            return redirect('/user/evaluation/check/?status=1');
+//        }
+        elseif(!empty($_COOKIE['award'.$request['award']]))
         {
             return $this->makeWeb((int)$request['award'], 2);
         }
@@ -33,9 +33,12 @@ class UserEvaluation extends Controller
             {
                 $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
                 setcookie('award'.($request['award'] - 1), Crypt::encryptString($_POST['choice']), $coTime, '/');
+                if(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
+                {
+                    return redirect('/user/evaluation/check/?status=1');
+                }
                 return $this->makeWeb((int)$request['award'], 0);
             }
-
         }
     }
 
@@ -46,7 +49,7 @@ class UserEvaluation extends Controller
         if(!empty($_COOKIE['award'.$awardId]) && $status == 2)
         {
             $tid = (int)Crypt::decryptString($_COOKIE['award' . $awardId]);
-            $teacherChose = $db->GetByTid($tid);
+            $teacherChose = $db->GetNameByTid($tid);
         }
         else
         {
@@ -71,17 +74,23 @@ class UserEvaluation extends Controller
         {
             $awardData = array();
             $awardNum = config('sjjs_awardSetting.awardNum');
+
+            $db = new TT_teacher();
+
             for($i = 1; $i <= $awardNum; $i++)
             {
-                if(empty($_COOKIE['award'.$i]))
-                    $awardData[] = (int)Crypt::decryptString($_COOKIE['award'.$i]);
+                if(!empty($_COOKIE['award'.$i]))
+                {
+                    $tid = (int)Crypt::decryptString($_COOKIE['award'.$i]);
+                    $awardData[] = $db->GetNameByTid($tid);
+                }
                 else
-                    $awardData[] = 0;
+                    $awardData[] = null;
             }
 
             if($request['status'] == '1')
             {
-                return view('user/checkEvaluationResult', compact($awardData));
+                return view('user/checkEvaluationResult', compact('awardData', 'awardNum'));
             }
             else
             {

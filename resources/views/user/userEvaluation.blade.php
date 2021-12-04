@@ -116,9 +116,9 @@
                     @endif
                 @endif
 
-                @if($awardId != 1)
+                @if($awardId > 1)
                     <section>
-                        <a href="{{ url('user/evaluation/?award='.($awardId - 1).'&status=back') }}">
+                        <a href="{{ url('user/evaluation/?award='.($awardId - 1)) }}">
                             <p><button type="button" class="btn btn-default">上一个</button></p></a>
                     </section>
                 @else
