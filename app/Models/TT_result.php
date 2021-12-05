@@ -17,4 +17,24 @@ class TT_result extends Model
 
     protected $table = "TT_result";
     public $timestamps = false;
+
+    public function updateOneByUidTid($uid,$awardTidData)
+    {
+//        try{
+            $awardNum = config('sjjs_awardSetting.awardNum');
+            $list = [
+                'uid' => $uid,
+            ];
+            for($i = 1; $i <= $awardNum; $i++)
+            {
+                $list['award'.$i] = $awardTidData[$i - 1];
+            }
+            $list['status'] = 1;
+            $this->insert($list);
+            return 1;
+//        }catch (Exception $e)
+//        {
+//            return 0;
+//        }
+    }
 }

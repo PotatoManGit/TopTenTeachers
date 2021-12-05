@@ -3,22 +3,49 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\TT_result;
 use App\Models\TT_teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class UserEvaluation extends Controller
 {
+
     public function UserEvaluation(Request $request)
     {
         if(empty($request['award']))
         {
-            return $this->makeWeb(1, 0);
+            return redirect('user/evaluation?award=1&status=op');
         }
 //        elseif(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
 //        {
 //            return redirect('/user/evaluation/check/?status=1');
 //        }
+        elseif(!empty($request['status']) && $request['status'] == 're_check')
+        {
+            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
+            setcookie('award'.($request['award']), Crypt::encryptString($_POST['choice']), $coTime, '/');
+            if(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
+            {
+                return redirect('/user/evaluation/check/?status=1');
+            }
+            return redirect('user/evaluation/check?status=1');
+        }
+        elseif(!empty($request['status']) && $request['status'] == 're')
+        {
+            if(!empty($_COOKIE['award'.$request['award']]))
+            {
+                return $this->makeWeb((int)$request['award'], -2);
+            }
+            else
+            {
+                return $this->makeWeb((int)$request['award'], -1);
+            }
+        }
+        elseif(!empty($request['status']) && $request['status'] == 'op')
+        {
+            return $this->makeWeb((int)$request['award'], 0);
+        }
         elseif(!empty($_COOKIE['award'.$request['award']]))
         {
             return $this->makeWeb((int)$request['award'], 2);
@@ -46,7 +73,7 @@ class UserEvaluation extends Controller
     {
         $db = new TT_teacher();
 
-        if(!empty($_COOKIE['award'.$awardId]) && $status == 2)
+        if(!empty($_COOKIE['award'.$awardId]) && ($status == 2 || $status == -2))
         {
             $tid = (int)Crypt::decryptString($_COOKIE['award' . $awardId]);
             $teacherChose = $db->GetNameByTid($tid);
@@ -66,14 +93,17 @@ class UserEvaluation extends Controller
 
     public function CheckEvaluationResult(Request $request)
     {
-        if(empty($request['status']) || $request['status'] != '1')
+        $uid = Crypt::decryptString($_COOKIE['tokenId']);
+        if(empty($request['status']))
         {
             return redirect('/user');
         }
         elseif($request['status'] == '1' || $request['status'] == '2')
         {
             $awardData = array();
+            $awardTidData = array();
             $awardNum = config('sjjs_awardSetting.awardNum');
+            $emp = 0;
 
             $db = new TT_teacher();
 
@@ -82,19 +112,30 @@ class UserEvaluation extends Controller
                 if(!empty($_COOKIE['award'.$i]))
                 {
                     $tid = (int)Crypt::decryptString($_COOKIE['award'.$i]);
+                    $awardTidData[] = $tid;
                     $awardData[] = $db->GetNameByTid($tid);
                 }
                 else
+                {
+                    $awardTidData[] = null;
                     $awardData[] = null;
+                    $emp++;
+                }
             }
 
-            if($request['status'] == '1')
+            if($request['status'] == '1' && $emp <= 0)
             {
-                return view('user/checkEvaluationResult', compact('awardData', 'awardNum'));
+                return view('user/checkEvaluationResult', compact('awardData', 'awardNum', 'emp'));
+            }
+            elseif($request['status'] == '2' && $emp <= 0)
+            {
+                $db = new TT_result();
+                $result = $db->updateOneByUidTid($uid ,$awardTidData);
+                return view('user/finishEvaluation', compact('result'));
             }
             else
             {
-                return 'update';
+                return redirect('user/evaluation/check?status=1');
             }
         }
         else
