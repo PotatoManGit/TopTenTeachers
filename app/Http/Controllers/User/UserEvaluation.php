@@ -23,8 +23,8 @@ class UserEvaluation extends Controller
 //        }
         elseif(!empty($request['status']) && $request['status'] == 're_check')
         {
-            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
-            setcookie('award'.($request['award']), Crypt::encryptString($_POST['choice']), $coTime, '/');
+//            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
+            setcookie('award'.($request['award']), Crypt::encryptString($_POST['choice']), $path='/');
             if(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
             {
                 return redirect('/user/evaluation/check/?status=1');
@@ -44,7 +44,10 @@ class UserEvaluation extends Controller
         }
         elseif(!empty($request['status']) && $request['status'] == 'op')
         {
-            return $this->makeWeb((int)$request['award'], 0);
+            if(!empty($_COOKIE['award'.$request['award']]))
+                return $this->makeWeb((int)$request['award'], 2);
+            else
+                return $this->makeWeb((int)$request['award'], 0);
         }
         elseif(!empty($_COOKIE['award'.$request['award']]))
         {
@@ -58,8 +61,8 @@ class UserEvaluation extends Controller
             }
             else
             {
-                $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
-                setcookie('award'.($request['award'] - 1), Crypt::encryptString($_POST['choice']), $coTime, '/');
+//                $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
+                setcookie('award'.($request['award'] - 1), Crypt::encryptString($_POST['choice']), $path='/');
                 if(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
                 {
                     return redirect('/user/evaluation/check/?status=1');
@@ -131,6 +134,13 @@ class UserEvaluation extends Controller
             {
                 $db = new TT_result();
                 $result = $db->updateOneByUidTid($uid ,$awardTidData);
+                for($i = 1; $i <= $awardNum; $i++)
+                {
+                    if(!empty($_COOKIE['award'.$i]))
+                    {
+                        setcookie('award'.$i,$_COOKIE['award'.$i], time()-1, '/');
+                    }
+                }
                 return view('user/finishEvaluation', compact('result'));
             }
             else

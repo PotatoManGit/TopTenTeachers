@@ -16,7 +16,7 @@ class TT_result extends Model
     use HasFactory;
 
     protected $table = "TT_result";
-    public $timestamps = false;
+    const CREATED_AT = 'upload_at';
 
     public function updateOneByUidTid($uid,$awardTidData)
     {
@@ -28,6 +28,7 @@ class TT_result extends Model
             for($i = 1; $i <= $awardNum; $i++)
             {
                 $list['award'.$i] = $awardTidData[$i - 1];
+                $list['upload_at'] = time();
             }
             $list['status'] = 1;
             $this->insert($list);
