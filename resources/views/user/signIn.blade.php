@@ -12,14 +12,15 @@
     <center><div style="margin-top: 2%">
             <form action="{{ url('user/sign_in/check') }}" method="post">
                 @csrf
-                <div class="input-group input-group-sm col-xs-4" style="margin-bottom: 1%">
+                <div class="input-group col-xs-4" style="margin-bottom: 1%">
                     <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
                     <input type="text" class="form-control" name="username"
                            aria-describedby="basic-addon3" placeholder="用户名"
                            required
                            pattern="[A-Za-z0-9]{7}" title="用户名输入格式错误，请检查后输入">
                 </div>
-                <div class="input-group input-group-sm col-xs-4">
+            
+                <div class="input-group col-xs-4">
                     <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
                     <input type="text" class="form-control" name="password"
                            aria-describedby="basic-addon3" placeholder="密码"
