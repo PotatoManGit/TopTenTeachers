@@ -23,9 +23,31 @@ class TT_user extends Model
     {
         return $this->where('username', $username)->first();
     }
-
+    public function UpdateUserStatus($uid, $newUserStatus)
+    {
+        return $this->where('uid', $uid)
+            ->update(['status' => $newUserStatus]);
+    }
+    public function UpdateLastSignInTime($uid)
+    {
+        return $this->where('uid', $uid)
+            ->update(['status' => time()]);
+    }
+    public function UpdateFinishTime($uid)
+    {
+        return $this->where('uid', $uid)
+            ->update(['status' => time()]);
+    }
+    public function GetUserStatus($uid)
+    {
+        return $this->where('uid', $uid)->value('status');
+    }
     public function CheckCookie($uid)
     {
         return $this->where('uid', $uid)->value('password');
+    }
+    public function GetUserType($uid)
+    {
+        return $this->where('uid', $uid)->value('type');
     }
 }

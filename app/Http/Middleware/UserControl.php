@@ -53,14 +53,25 @@ class UserControl
         $db = new TT_user();
 
         $truePassword = $db->CheckCookie($uid);
+        $userStatus = $db->GetUserStatus($uid);
 
-        if($truePassword == $password)
+        if($db->GetUserType($uid) == config('sjjs_userSystem.admin_user_type'))
+            $userStatus = 1;
+
+        if($truePassword == $password && $userStatus != 2)
         {
             return $next($request);
         }
+        elseif($truePassword == $password && $userStatus == 2)
+        {
+            if(empty($request['status']) || $request['status'] != 'noNeedToDo')
+                return redirect('/user/?status=noNeedToDo');
+            else
+                return $next($request);
+        }
         else
         {
-            redirect('/user/sign_in');
+            return redirect('/user/sign_in');
         }
     }
 }

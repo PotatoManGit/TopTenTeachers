@@ -31,12 +31,15 @@ class SignIn extends Controller
 
         if(!empty($getData->password) && $getData->password == $password)
         {
+            $db -> UpdateUserStatus($getData->uid, 1);
+            $db -> UpdateLastSignInTime($getData->uid);
+
             // 加密操作
             $U_uid = Crypt::encryptString($getData->uid);
             $U_password = Crypt::encryptString($getData->password);
 
             $coTime = time()+config('sjjs_userSystem.cookieHoldTime_ignIn');
-            if($getData->type == 111)
+            if($getData->type == config('sjjs_userSystem.admin_user_type'))
             {
                 $coTime = time()+3600;
             }

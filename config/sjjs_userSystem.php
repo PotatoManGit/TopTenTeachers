@@ -12,6 +12,7 @@ return[
     |
     */
 
+    'admin_user_type' => 777,
     'cookieHoldTime_signIn'=>600,
-    'cookieHoldTime_saveChoice'=>600,
+//    'cookieHoldTime_saveChoice'=>600,
 ];

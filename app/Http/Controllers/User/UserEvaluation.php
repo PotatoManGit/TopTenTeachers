@@ -5,8 +5,15 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\TT_result;
 use App\Models\TT_teacher;
+use App\Models\TT_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+
+/**
+ * Class UserEvaluation
+ * @package App\Http\Controllers\User
+ * 用户评教控制器，懂的都懂
+ */
 
 class UserEvaluation extends Controller
 {
@@ -139,6 +146,9 @@ class UserEvaluation extends Controller
                     if(!empty($_COOKIE['award'.$i]))
                     {
                         setcookie('award'.$i,$_COOKIE['award'.$i], time()-1, '/');
+                        $dbU = new TT_user();
+                        $dbU -> UpdateUserStatus($uid, 2);
+                        $dbU -> UpdateFinishTime($uid);
                     }
                 }
                 return view('user/finishEvaluation', compact('result'));
