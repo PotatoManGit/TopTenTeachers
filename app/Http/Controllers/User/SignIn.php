@@ -38,7 +38,7 @@ class SignIn extends Controller
             $U_uid = Crypt::encryptString($getData->uid);
             $U_password = Crypt::encryptString($getData->password);
 
-            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_ignIn');
+            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_signIn');
             if($getData->type == config('sjjs_userSystem.admin_user_type'))
             {
                 $coTime = time()+3600;

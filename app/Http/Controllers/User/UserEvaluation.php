@@ -30,8 +30,8 @@ class UserEvaluation extends Controller
 //        }
         elseif(!empty($request['status']) && $request['status'] == 're_check')
         {
-//            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
-            setcookie('award'.($request['award']), Crypt::encryptString($_POST['choice']), $path='/');
+            $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
+            setcookie('award'.($request['award']), Crypt::encryptString($_POST['choice']), $coTime, '/');
             if(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
             {
                 return redirect('/user/evaluation/check/?status=1');
@@ -68,8 +68,8 @@ class UserEvaluation extends Controller
             }
             else
             {
-//                $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
-                setcookie('award'.($request['award'] - 1), Crypt::encryptString($_POST['choice']), $path='/');
+                $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
+                setcookie('award'.($request['award'] - 1), Crypt::encryptString($_POST['choice']), $coTime, '/');
                 if(!empty($_POST['choice']) && (int)$request['award'] == 1 + config('sjjs_awardSetting.awardNum'))
                 {
                     return redirect('/user/evaluation/check/?status=1');
@@ -145,12 +145,12 @@ class UserEvaluation extends Controller
                 {
                     if(!empty($_COOKIE['award'.$i]))
                     {
-                        setcookie('award'.$i,$_COOKIE['award'.$i], time()-1, '/');
-                        $dbU = new TT_user();
-                        $dbU -> UpdateUserStatus($uid, 2);
-                        $dbU -> UpdateFinishTime($uid);
+                        setcookie('award'.$i, $_COOKIE['award'.$i], time()-1, '/');
                     }
                 }
+                $dbU = new TT_user();
+                $dbU -> UpdateUserStatus($uid, 2);
+                $dbU -> UpdateFinishTime($uid);
                 return view('user/finishEvaluation', compact('result'));
             }
             else

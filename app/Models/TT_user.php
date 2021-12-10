@@ -17,7 +17,7 @@ class TT_user extends Model
 
     protected $table = "TT_user";
     protected $primaryKey = 'uid';
-    const UPDATED_AT = 'last_sign_in';
+    public $timestamps = false;
 
     public function GetUserPassword($username)
     {
@@ -30,13 +30,15 @@ class TT_user extends Model
     }
     public function UpdateLastSignInTime($uid)
     {
+        $time = time();
         return $this->where('uid', $uid)
-            ->update(['status' => time()]);
+            ->update(['last_sign_in' => $time]);
     }
     public function UpdateFinishTime($uid)
     {
+        $time = time();
         return $this->where('uid', $uid)
-            ->update(['status' => time()]);
+            ->update(['finish_time' => $time]);
     }
     public function GetUserStatus($uid)
     {
