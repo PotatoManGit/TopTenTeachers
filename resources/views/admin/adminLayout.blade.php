@@ -52,30 +52,32 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-{{--                    <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>--}}
+                    {{--                    <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>--}}
                     <li><a href="/">首页</a></li>
-                    <li><a href="{{ url('user/') }}">评选者入口</a></li>
-                    <li><a href="{{ url('admin/') }}">管理者入口</a></li>
+                    <li><a href="{{ url('admin/') }}">管理者首页</a></li>
+                    <li><a href="{{ url('admin/config') }}">网站配置</a></li>
+                    <li><a href="{{ url('admin/result_get') }}">结果查询</a></li>
+                    <li><a href="{{ url('public/status_monitor') }}">评教状态监控</a></li>
                     <li><a href="{{ url('public/') }}">评选结果公布</a></li>
-{{--                    <li class="dropdown">--}}
-{{--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--}}
-{{--                        <ul class="dropdown-menu">--}}
-{{--                            <li><a href="#">Action</a></li>--}}
-{{--                            <li><a href="#">Another action</a></li>--}}
-{{--                            <li><a href="#">Something else here</a></li>--}}
-{{--                            <li role="separator" class="divider"></li>--}}
-{{--                            <li><a href="#">Separated link</a></li>--}}
-{{--                            <li role="separator" class="divider"></li>--}}
-{{--                            <li><a href="#">One more separated link</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                    {{--                    <li class="dropdown">--}}
+                    {{--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--}}
+                    {{--                        <ul class="dropdown-menu">--}}
+                    {{--                            <li><a href="#">Action</a></li>--}}
+                    {{--                            <li><a href="#">Another action</a></li>--}}
+                    {{--                            <li><a href="#">Something else here</a></li>--}}
+                    {{--                            <li role="separator" class="divider"></li>--}}
+                    {{--                            <li><a href="#">Separated link</a></li>--}}
+                    {{--                            <li role="separator" class="divider"></li>--}}
+                    {{--                            <li><a href="#">One more separated link</a></li>--}}
+                    {{--                        </ul>--}}
+                    {{--                    </li>--}}
                 </ul>
-{{--                <form class="navbar-form navbar-left">--}}
-{{--                    <div class="form-group">--}}
-{{--                        <input type="text" class="form-control" placeholder="Search">--}}
-{{--                    </div>--}}
-{{--                    <button type="submit" class="btn btn-default">Submit</button>--}}
-{{--                </form>--}}
+                {{--                <form class="navbar-form navbar-left">--}}
+                {{--                    <div class="form-group">--}}
+                {{--                        <input type="text" class="form-control" placeholder="Search">--}}
+                {{--                    </div>--}}
+                {{--                    <button type="submit" class="btn btn-default">Submit</button>--}}
+                {{--                </form>--}}
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ url('user/sign_in') }}">登录</a></li>
                     <li class="dropdown">
@@ -94,7 +96,7 @@
 </div>
 
 <div class="container page_center">
-    @yield('content')
+    @yield('content_admin')
 </div>
 <footer class="footer navbar-fixed-bottom ">
     <div class="container">
