@@ -8,7 +8,10 @@
 
 
     <center><h1>登录</h1></center>
-
+    @if($cause == 2)
+        <center><div class="alert alert-danger" role="alert">您没有管理员身份，无法进入管理员入口！</div></center>
+    @else
+    @endif
     <center><div style="margin-top: 2%">
             <form action="{{ url('user/sign_in/check') }}" method="post">
                 @csrf
@@ -19,7 +22,7 @@
                            required
                            pattern="[A-Za-z0-9]{7}" title="用户名输入格式错误，请检查后输入">
                 </div>
-            
+
                 <div class="input-group col-xs-4">
                     <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
                     <input type="text" class="form-control" name="password"

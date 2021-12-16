@@ -18,7 +18,7 @@ class TT_result extends Model
     protected $table = "TT_result";
     const CREATED_AT = 'upload_at';
 
-    public function updateOneByUidTid($uid,$awardTidData)
+    public function UpdateOneByUidTid($uid,$awardTidData): int
     {
 //        try{
             $awardNum = config('sjjs_awardSetting.awardNum');
@@ -37,5 +37,9 @@ class TT_result extends Model
 //        {
 //            return 0;
 //        }
+    }
+    public function GetAllData()
+    {
+        return $this->Get();
     }
 }

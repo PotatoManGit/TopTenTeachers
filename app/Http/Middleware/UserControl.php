@@ -41,7 +41,7 @@ class UserControl
         {
             echo "13";
             // 错误输出 未完成
-            return redirect('/user/sign_in');
+            return redirect('/user/sign_in?cause=0');
         }
         else
         {
@@ -71,7 +71,7 @@ class UserControl
         }
         else
         {
-            return redirect('/user/sign_in');
+            return redirect('/user/sign_in?cause=1');
         }
     }
 }

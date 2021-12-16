@@ -17,6 +17,10 @@
             -moz-background-size:cover;
             -webkit-background-size:cover;
         }
+        .page_center {
+            background-color: rgb(242, 224, 255);
+            border-radius: 40px;
+        }
     </style>
 
     <!-- Bootstrap -->
@@ -89,7 +93,7 @@
     </nav>
 </div>
 
-<div class="container">
+<div class="container page_center">
     @yield('content')
 </div>
 

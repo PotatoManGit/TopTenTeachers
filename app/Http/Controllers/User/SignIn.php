@@ -15,10 +15,14 @@ use Illuminate\Support\Facades\Crypt;
 
 class SignIn extends Controller
 {
-    public function SignIn()
+    public function SignIn(Request $request)
     {
         $check_result = 0;
-        return view('user/signIn', compact('check_result'));
+        if(empty((int)$request['cause']))
+            $cause = null;
+        else
+            $cause = (int)$request['cause'];
+        return view('user/signIn', compact('check_result', 'cause'));
     }
 
     public function SignInCheck()

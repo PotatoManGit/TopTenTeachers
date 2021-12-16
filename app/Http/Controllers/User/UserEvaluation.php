@@ -140,7 +140,7 @@ class UserEvaluation extends Controller
             elseif($request['status'] == '2' && $emp <= 0)
             {
                 $db = new TT_result();
-                $result = $db->updateOneByUidTid($uid ,$awardTidData);
+                $result = $db->UpdateOneByUidTid($uid ,$awardTidData);
                 for($i = 1; $i <= $awardNum; $i++)
                 {
                     if(!empty($_COOKIE['award'.$i]))
