@@ -19,7 +19,7 @@ class Admin extends Controller
         $makeData = new DataProcessing();
         $allFinishNum = $makeData->FinishEvaluationNum();
         $result = $makeData->Result(1, 3);
-        return view('admin/admin', compact('allFinishNum', 'result'));
+        return view('admin/admin', compact('allFinishNum'));
 //        print("<pre>"); // 格式化输出数组
 //        print_r($result);
 //        print("</pre>");

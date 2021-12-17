@@ -18,7 +18,7 @@
             -webkit-background-size:cover;
         }
         .page_center {
-            background-color: rgb(242, 224, 255);
+            /*background-color: rgb(242, 224, 255);*/
             border-radius: 40px;
         }
     </style>

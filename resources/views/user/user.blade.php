@@ -1,7 +1,12 @@
 @extends("layout")
 
 @section("content")
-    @if($status == 2)
+    @if($webStatus != 1)
+        <center>
+            <div class="alert alert-danger" role="alert"><h1>评教还未开始，暂停或已经结束<br/>
+                    <b>请联系管理员或者指导老师</b></h1></div>
+        </center>
+    @elseif($status == 2)
         <center>
             <div class="alert alert-danger" role="alert"><h1>您已完成评教，无需再次评教<br/>
                     <b><a href="{{ url('/public') }}">点击查看评奖实时排名</a></b></h1></div>

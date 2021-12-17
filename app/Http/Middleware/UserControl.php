@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\TT_user;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 
 /**
@@ -58,7 +59,14 @@ class UserControl
         if($db->GetUserType($uid) == config('sjjs_userSystem.admin_user_type'))
             $userStatus = 1;
 
-        if($truePassword == $password && $userStatus != 2)
+        if(Cache::get('evaluation_status') != 1)
+        {
+            if(empty($request['status']) || $request['status'] != 'webStopped')
+                return redirect('/user/?status=webStopped');
+            else
+                return $next($request);
+        }
+        elseif($truePassword == $password && $userStatus != 2)
         {
             return $next($request);
         }

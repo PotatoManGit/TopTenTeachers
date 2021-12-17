@@ -9,6 +9,7 @@ use App\Http\Controllers\User\User;
 use App\Http\Controllers\User\UserEvaluation;
 use App\Http\Controllers\Test;
 use App\Http\Controllers\Admin\Admin;
+use App\Http\Controllers\Admin\AdminControl;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,7 @@ Route::any('user/evaluation/check', [UserEvaluation::class,"CheckEvaluationResul
 // 管理员相关路由
 Route::any('/admin/', [Admin::class, 'Admin'])
     ->middleware('admin_control');
-
+Route::any('admin/control/', [AdminControl::class, 'AdminControl'])
+    ->middleware('admin_control');
 
 Route::any('/test', [Test::class, "Test"]);
