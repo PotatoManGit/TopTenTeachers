@@ -56,8 +56,8 @@
                     <li><a href="/">首页</a></li>
                     <li><a href="{{ url('admin/') }}">管理者首页</a></li>
                     <li><a href="{{ url('admin/config') }}">网站配置</a></li>
-                    <li><a href="{{ url('admin/result_get') }}">结果查询</a></li>
-                    <li><a href="{{ url('public/status_monitor') }}">评教状态监控</a></li>
+                    <li><a href="{{ url('admin/result_view') }}">结果查询</a></li>
+                    <li><a href="{{ url('public/user_regulate') }}">用户管理</a></li>
                     <li><a href="{{ url('public/') }}">评选结果公布</a></li>
                     {{--                    <li class="dropdown">--}}
                     {{--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--}}

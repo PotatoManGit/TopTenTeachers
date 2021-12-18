@@ -4,11 +4,21 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Models\TT_result;
+use App\Models\TT_teacher;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Array_;
 
+/**
+ * Class DataProcessing
+ * @package App\Http\Controllers\System
+ * 工具函数实现
+ */
 class DataProcessing extends Controller
 {
+    /**
+     * @return int
+     * 获取评教人数
+     */
     public function FinishEvaluationNum(): int
     {
         $db = new TT_result();
@@ -22,17 +32,18 @@ class DataProcessing extends Controller
         return $cou;
     }
 
-    // 排序统计算法-获取前x名
-    public function Result($awardNum, $num)
+    /**
+     * @param int $awardNum
+     * @return \null[][]
+     * 排序统计算法
+     */
+    public function Result(int $awardNum): array
     {
         $db = new TT_result();
         $allData = $db->GetAllData();
         $max = $this->FinishEvaluationNum();
         $cou = 0;
         $resultData = Array(
-            Array(null, null),
-        );
-        $result = Array(
             Array(null, null),
         );
         $award = 'award'.$awardNum;
@@ -59,28 +70,45 @@ class DataProcessing extends Controller
 
         array_multisort(array_column($resultData, 1), SORT_DESC, $resultData);
 
-        $cou = 0;
-        $nowMax = 0;
-        $num++;
-        foreach($resultData as $i)
+        return $resultData;
+    }
+
+    /**
+     * @param int $award
+     * @param int $num
+     * @return \null[][]
+     * 格式化结果数据，显示前n名或显示全部
+     */
+    public function DataFormatting(int $award/* 为-1时显示全部 */, int $num/* 为-1时显示全部 */): array
+    {
+        $dbT = new TT_teacher();
+        $formativeResult = Array(
+            Array('ranking'=> null ,'name' => null, 'vote' => null)
+        );
+        if($award > 0)
         {
-            $cou++;
-            if($i[1] == $nowMax)
+            $data = $this->Result($award);
+            $max = 0;
+            $nowRanking = 1;
+            $cou = 0;
+            foreach($data as $i)
             {
-                $result[][0] = $i[0];
-                $result[$cou][1] = $i[1];
-            }
-            else
-            {
-                if($num >= 1 && $cou >= $num)
+                $cou++;
+                if($num > 0 && $num <= $nowRanking)
                     break;
 
-                $result[][0] = $i[0];
-                $result[$cou][1] = $i[1];
-                $nowMax = $i[1];
+                if($i[1] == $max)
+                    $formativeResult[][] = ['ranking' =>  $nowRanking,'name' => $dbT->GetNameByTid($i[0]), 'vote' => $i[1]];
+                else
+                {
+                    $formativeResult[][] = ['ranking' =>  $cou,'name' => $dbT->GetNameByTid($i[0]), 'vote' => $i[1]];
+                    $nowRanking = $cou;
+                    $max = $i[1];
+                }
             }
         }
-        unset($result[0]);
-        return $result;
+        unset($formativeResult[0]);
+        return $formativeResult;
     }
+
 }

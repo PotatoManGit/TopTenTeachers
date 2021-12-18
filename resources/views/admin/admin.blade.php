@@ -6,14 +6,21 @@
     <center><h1>管理面板</h1></center>
 
     <div>
-        <div class="panel panel-primary col-md-3">
-            <div class="panel-heading">现在已完成评选人数</div>
+        <div class="panel panel-primary col-md-4">
+            <div class="panel-heading">现在评教状态</div>
+            @if($evaluationStatus == 1)
             <div class="panel-body">
                 <p>已有<b>{{ $allFinishNum }}</b>人完成评教</p>
+                <p>评教持续了<b>{{ $evaluationContinueTime }}</b></p>
             </div>
+            @else
+                <div class="panel-body">
+                    <p><b>评教尚未开始</b></p>
+                </div>
+            @endif
         </div>
         <div class="panel panel-primary col-md-5">
-            <div class="panel-heading">导航</div>
+            <div class="panel-heading">快捷操作</div>
             <div class="panel-body">
                 <ul class="nav nav-pills nav-stacked">
                     <li role="presentation"><a href="{{ url('/admin/control?cmd=evaluationStatus&val-1=run') }}">开始评教</a></li>

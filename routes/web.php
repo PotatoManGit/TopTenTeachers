@@ -10,7 +10,7 @@ use App\Http\Controllers\User\UserEvaluation;
 use App\Http\Controllers\Test;
 use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\AdminControl;
-
+use App\Http\Controllers\Admin\ResultView;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,5 +39,9 @@ Route::any('/admin/', [Admin::class, 'Admin'])
     ->middleware('admin_control');
 Route::any('admin/control/', [AdminControl::class, 'AdminControl'])
     ->middleware('admin_control');
+Route::any('admin/result_view', [ResultView::class, 'ResultView'])
+    ->middleware('admin_control');
+//Route::any('admin/result_view/show_one', [ResultView::class, 'ViewOne'])
+//    ->middleware('admin_control');
 
 Route::any('/test', [Test::class, "Test"]);

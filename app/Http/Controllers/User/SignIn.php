@@ -49,7 +49,7 @@ class SignIn extends Controller
             }
             setcookie("tokenId", $U_uid, $coTime, '/');
             setcookie("token", $U_password, $coTime, '/');
-            return redirect('/user/');
+            return redirect('user');
         }
         else
         {

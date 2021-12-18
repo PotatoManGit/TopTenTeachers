@@ -19,12 +19,14 @@ class Control extends Controller
         {
             Cache::forget('evaluation_status');
             Cache::forever('evaluation_status', 1);
+            Cache::forever('evaluation_start_at', time());
             return 1;
         }
         elseif($val == 'stop')
         {
             Cache::forget('evaluation_status');
             Cache::forever('evaluation_status', 0);
+            Cache::forget('evaluation_start_at');
             return 1;
         }
         else
