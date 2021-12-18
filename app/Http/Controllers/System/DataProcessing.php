@@ -79,7 +79,7 @@ class DataProcessing extends Controller
      * @return \null[][]
      * 格式化结果数据，显示前n名或显示全部
      */
-    public function DataFormatting(int $award/* 为-1时显示全部 */, int $num/* 为-1时显示全部 */): array
+    public function DataFormatting(int $award, int $num/* 为-1时显示全部 */): array
     {
         $dbT = new TT_teacher();
         $formativeResult = Array(
@@ -91,11 +91,14 @@ class DataProcessing extends Controller
             $max = 0;
             $nowRanking = 1;
             $cou = 0;
-            foreach($data as $i)
+            foreach($data as $key=>$i)
             {
                 $cou++;
-                if($num > 0 && $num <= $nowRanking)
+                if (($num > 0 && $nowRanking > $num))
+                {
+                    unset($formativeResult[$key]);
                     break;
+                }
 
                 if($i[1] == $max)
                     $formativeResult[][] = ['ranking' =>  $nowRanking,'name' => $dbT->GetNameByTid($i[0]), 'vote' => $i[1]];

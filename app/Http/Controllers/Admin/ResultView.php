@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\DataProcessing;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
+use PhpParser\Node\Expr\Array_;
 
 /**
  * Class ResultView
@@ -17,31 +20,64 @@ class ResultView extends Controller
 {
     public function ResultView(Request $request)
     {
-//        return view('admin/resultView');
-        return $this->ViewOne($request);
+        if(empty($request['award']) || empty($request['num']))
+        {
+            $strIn = '';
+            for($i =1; $i <= config('sjjs_awardSetting.awardNum'); $i++)
+            {
+                if($i == 1)
+                    $strIn = $i;
+                else
+                    $strIn = $strIn.','.$i;
+            }
+            return redirect('/admin/result_view?award='.$strIn.'&num=-1');
+        }
+        return $this->Show($request);
     }
 
+    public function Check()
+    {
+        if(empty($_POST['award']))
+        {
+            return view('admin/resultView', ['type' => 2]);
+        }
+        else
+        {
+            $strIn = '';
+            foreach($_POST['award'] as $key => $i)
+            {
+                if($key == 0)
+                    $strIn = $i;
+                else
+                    $strIn = $strIn.','.$i;
+            }
+            if(!empty($_POST['num']))
+                return redirect('/admin/result_view?award='.$strIn.'&num='.$_POST['num']);
 
-    public function ViewOne($request)
+            else
+                return redirect('/admin/result_view?award='.$strIn.'&num=-1');
+        }
+    }
+
+    public function Show($request)
     {
         $re = new DataProcessing();
 
-        if(!empty($request['award']) && (int)$request['award'] <= config('sjjs_awardSetting.awardNum')
-            && (int)$request['award'] > 0 && !empty($request['num']))
+        if((int)$request['award'] <= config('sjjs_awardSetting.awardNum') && (int)$request['award'] > 0)
         {
-            $data = $re->DataFormatting((int)$request['award'], (int)$request['num']);
-            //当前页数 默认1
-            $page = $request->page ?: 1;
-            //每页的条数
-            $perPage = 20;
-            //计算每页分页的初始位置
-            $offset = ($page * $perPage) - $perPage;
-            //实例化LengthAwarePaginator类，并传入对应的参数
-            $data = new LengthAwarePaginator(array_slice($data, $offset, $perPage, true), count($data), $perPage,
-                $page, ['path' => $request->url(), 'query' => $request->query()]);
-            return view('admin/resultView', compact('data'));
+            $num = (int)$request['num'];
+            $data = Array();
+            $need = explode(',', str_replace(' ', '', $request['award']));
+            foreach($need as $i)
+            {
+                $data[] = $re->DataFormatting((int)$i, $num);
+            }
+            $type = 1;
+            return view('admin/resultView', compact('data', 'num', 'type'));
         }
         else
+        {
             return view('admin/operationFinished', ['result' => 0]);
+        }
     }
 }

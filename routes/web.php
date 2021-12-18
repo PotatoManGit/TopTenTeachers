@@ -41,7 +41,7 @@ Route::any('admin/control/', [AdminControl::class, 'AdminControl'])
     ->middleware('admin_control');
 Route::any('admin/result_view', [ResultView::class, 'ResultView'])
     ->middleware('admin_control');
-//Route::any('admin/result_view/show_one', [ResultView::class, 'ViewOne'])
-//    ->middleware('admin_control');
+Route::any('admin/result_view/check', [ResultView::class, 'Check'])
+    ->middleware('admin_control');
 
 Route::any('/test', [Test::class, "Test"]);
