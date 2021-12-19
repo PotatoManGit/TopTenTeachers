@@ -5,7 +5,7 @@
     <div class="jumbotron" style="text-align: center">
         <h1>数据查询</h1>
         <p>在此处实时查询此次评教的数据</p>
-        <p>默认显示所以数据，如果要进行筛选，请在下方筛选栏中进行相关操作</p>
+        <p>默认显示所有数据，如果要进行筛选，请在下方筛选栏中进行相关操作</p>
 {{--        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>--}}
     </div>
 
@@ -21,6 +21,14 @@
                         请选择输出的奖项 <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
+                        <center>
+                            <li>
+                                <label for="-1">
+                                    <h4>全部</h4>
+                                </label>
+                                <input id="-1" name="award[]" type="checkbox" value="-1" style="zoom: 120%">
+                            </li>
+                        </center>
                         @for($i = 1; $i <= config('sjjs_awardSetting.awardNum'); $i++)
                             <center>
                                 <li>
@@ -53,13 +61,13 @@
                 <div class="alert alert-wrong" role="alert"><h3><b>暂无数据</b><br/>如的确产生了数据，请联系管理员</h3></div>
             @else
                 @foreach($data as $key => $val)
-                    <div class="col-md-3 col-xs-6 clearfix"><div class="panel panel-primary">
-                            <div class="panel-heading"><h4><b>{{ config('sjjs_awardSetting.award'.++$key) }}</b></h4></div>
+                    <div class="col-md-3 col-xs-12 clearfix"><div class="panel panel-primary">
+                            <div class="panel-heading"><h4><b>{{ config('sjjs_awardSetting.award'.$need[$key]) }}</b></h4></div>
                             <div class="panel-body">
                                 @if($num > 0)
-                                    <p>以下是关于称号<b>{{ config('sjjs_awardSetting.award'.++$key) }}</b>的前<b>{{ $num }}</b>名</p>
+                                    <p>以下是关于称号<b>{{ config('sjjs_awardSetting.award'.$need[$key]) }}</b>的前<b>{{ $num }}</b>名</p>
                                 @else
-                                    <p>以下是关于称号<b>{{ config('sjjs_awardSetting.award'.++$key) }}</b>的全部数据</p>
+                                    <p>以下是关于称号<b>{{ config('sjjs_awardSetting.award'.$need[$key]) }}</b>的全部数据</p>
                                 @endif
                             </div>
 

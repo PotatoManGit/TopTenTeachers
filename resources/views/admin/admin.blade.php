@@ -34,10 +34,11 @@
                         <li role="presentation"><a href="{{ url('/admin/control?cmd=evaluationStatus&val-1=run') }}">开始评教</a></li>
                         <li role="presentation"><a href="{{ url('/admin/control?cmd=evaluationStatus&val-1=stop') }}">停止评教</a></li>
                         <li role="presentation"><a href="{{ url('/') }}">前往普通用户网页</a></li>
-                        <li role="presentation"><a href="{{ url('/admin/result_get') }}">结果查询</a></li>
+                        <li role="presentation"><a href="{{ url('/admin/result_view') }}">结果查询</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <br/><br/><br/><br/><br/>
 @stop

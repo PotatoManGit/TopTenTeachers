@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\DataProcessing;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
-use PhpParser\Node\Expr\Array_;
 
 /**
  * Class ResultView
@@ -44,7 +42,12 @@ class ResultView extends Controller
         else
         {
             $strIn = '';
-            foreach($_POST['award'] as $key => $i)
+            $awardNeed = $_POST['award'];
+
+            if(in_array(-1, $awardNeed))
+                return redirect('/admin/result_view');
+
+            foreach($awardNeed as $key => $i)
             {
                 if($key == 0)
                     $strIn = $i;
@@ -63,21 +66,68 @@ class ResultView extends Controller
     {
         $re = new DataProcessing();
 
-        if((int)$request['award'] <= config('sjjs_awardSetting.awardNum') && (int)$request['award'] > 0)
+        $need = explode(',', str_replace(' ', '', $request['award'])); // php 7+
+        if(!($need === false))
         {
             $num = (int)$request['num'];
             $data = Array();
-            $need = explode(',', str_replace(' ', '', $request['award']));
-            foreach($need as $i)
+
+            $max = 0;
+
+            foreach($need as $key=>$i)
             {
                 $data[] = $re->DataFormatting((int)$i, $num);
+                $max = $key;
             }
+
+            if(!empty($request['export']) && $request['export'] == 'download')
+            {
+                $ex = $re->DataFormattingCsv($data, $need, $num);
+                if($max++ < config('sjjs_awardSetting.awardNum') || ($num != $re->FinishEvaluationNum() && $num > 0))
+                    $fileName = '../public/tmp/部分评教结果.xlsx';
+                else
+                    $fileName = '../public/tmp/全部评教结果.xlsx';
+                $this->DownloadControl($fileName, $ex, '');
+            }
+
             $type = 1;
-            return view('admin/resultView', compact('data', 'num', 'type'));
+            return view('admin/resultView', compact('data', 'num', 'type', 'need'));
         }
         else
         {
             return view('admin/operationFinished', ['result' => 0]);
         }
+    }
+
+    public function DownloadControl($fileName, $data, $url)
+    {
+        //创建文件到指定目录
+        file_put_contents($fileName,$data);
+        //打开文件，如果文件不存在会进行创建
+        $fp=fopen($fileName,"r");
+        //返回文件大小
+        $file_size=filesize($fileName);
+        //下载文件需要用到的头
+        Header("Content-type: application/octet-stream");
+        Header("Accept-Ranges: bytes");
+        Header("Accept-Length:".$file_size);
+        Header("Content-Disposition: attachment; filename=".str_replace('../public', "", $fileName));
+        $buffer=1024; //设置一次读取的字节数，每读取一次，就输出数据（即返回给浏览器）
+        $file_count=0; //读取的总字节数
+        //向浏览器返回数据
+        while(!feof($fp) && $file_count<$file_size){
+            //读取打开的文件
+            $file_con=fread($fp,$buffer);
+            $file_count+=$buffer;
+            echo $file_con;
+        }
+        //关闭打开的文件
+        fclose($fp);
+        //下载完成后删除文件
+        if($file_count >= $file_size)
+        {
+            unlink($fileName);
+        }
+        return 0;
     }
 }
