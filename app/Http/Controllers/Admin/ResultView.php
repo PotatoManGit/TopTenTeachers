@@ -8,6 +8,8 @@ use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
+require_once('../../../../app/libs/PHPExcel/Classes/PHPExcel.php');
+
 /**
  * Class ResultView
  * @package App\Http\Controllers\Admin
@@ -82,12 +84,14 @@ class ResultView extends Controller
 
             if(!empty($request['export']) && $request['export'] == 'download')
             {
-                $ex = $re->DataFormattingCsv($data, $need, $num);
-                if($max++ < config('sjjs_awardSetting.awardNum') || ($num != $re->FinishEvaluationNum() && $num > 0))
-                    $fileName = '../public/tmp/部分评教结果.xlsx';
-                else
-                    $fileName = '../public/tmp/全部评教结果.xlsx';
-                $this->DownloadControl($fileName, $ex, '');
+//                $ex = $re->DataFormattingCsv($data, $need, $num);
+//                if($max++ < config('sjjs_awardSetting.awardNum') || ($num != $re->FinishEvaluationNum() && $num > 0))
+//                    $fileName = '../public/tmp/部分评教结果.xlsx';
+//                else
+//                    $fileName = '../public/tmp/全部评教结果.xlsx';
+//                $this->DownloadControl($fileName, $ex, '');
+                $ex = new PHPExcel();
+                print_r($ex);
             }
 
             $type = 1;
