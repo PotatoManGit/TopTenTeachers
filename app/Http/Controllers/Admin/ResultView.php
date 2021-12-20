@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\EvaluationResultExport;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\DataProcessing;
+use App\Http\Controllers\System\Export;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Maatwebsite\Excel\Facades\Excel;
 
-require_once('../../../../app/libs/PHPExcel/Classes/PHPExcel.php');
 
 /**
  * Class ResultView
@@ -84,14 +86,11 @@ class ResultView extends Controller
 
             if(!empty($request['export']) && $request['export'] == 'download')
             {
-//                $ex = $re->DataFormattingCsv($data, $need, $num);
-//                if($max++ < config('sjjs_awardSetting.awardNum') || ($num != $re->FinishEvaluationNum() && $num > 0))
-//                    $fileName = '../public/tmp/部分评教结果.xlsx';
-//                else
-//                    $fileName = '../public/tmp/全部评教结果.xlsx';
-//                $this->DownloadControl($fileName, $ex, '');
-                $ex = new PHPExcel();
-                print_r($ex);
+                if($max++ < config('sjjs_awardSetting.awardNum') || ($num != $re->FinishEvaluationNum() && $num > 0))
+                    $fileName = '部分评教结果.xlsx';
+                else
+                    $fileName = '全部评教结果.xlsx';
+                return (new Export())->EvaluationResultToExcel($data, $need, $fileName);
             }
 
             $type = 1;
