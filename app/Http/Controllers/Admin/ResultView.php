@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\EvaluationResultExport;
+use App\Exports\EvaluationResultExport\EvaluationResultExport\EvaluationResultExport;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\DataProcessing;
 use App\Http\Controllers\System\Export;
@@ -86,15 +86,16 @@ class ResultView extends Controller
 
             if(!empty($request['export']) && $request['export'] == 'download')
             {
-                if($max++ < config('sjjs_awardSetting.awardNum') || ($num != $re->FinishEvaluationNum() && $num > 0))
+                if(($max+1) < config('sjjs_awardSetting.awardNum') || ($num != $re->FinishEvaluationNum() && $num > 0))
                     $fileName = '部分评教结果.xlsx';
                 else
                     $fileName = '全部评教结果.xlsx';
-                return (new Export())->EvaluationResultToExcel($data, $need, $fileName);
+                return (new Export())->EvaluationResultToExcel($data, ($max + 1), $fileName);
             }
 
             $type = 1;
-            return view('admin/resultView', compact('data', 'num', 'type', 'need'));
+            $needStr = $request['award'];
+            return view('admin/resultView', compact('data', 'num', 'type', 'need', 'needStr', 'max'));
         }
         else
         {

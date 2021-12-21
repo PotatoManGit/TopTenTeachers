@@ -3,9 +3,10 @@
 @section("content_admin")
 
     <div class="jumbotron" style="text-align: center">
-        <h1>数据查询</h1>
+        <h1>数据查询和导出</h1>
         <p>在此处实时查询此次评教的数据</p>
-        <p>默认显示所有数据，如果要进行筛选，请在下方筛选栏中进行相关操作</p>
+        <p>默认显示所有数据，如果要进行筛选,导出格式为excel，请在下方筛选栏中进行相关操作</p>
+        <p><b>进行筛选后，请务必先点击查询，查询成功后再点击导出</b></p>
 {{--        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>--}}
     </div>
 
@@ -48,9 +49,17 @@
                     </label>
                     <input id="num" type="text" name="num" class="form-control" placeholder="请输入数据">
                 </div>
-                <div class="co-md-2 form-group">
+                <div class="co-md-1 form-group">
                     <button type="submit" class="btn btn-primary">查询</button>
                 </div>
+                @if($type == 1)
+                <div class="co-md-1 form-group">
+                    <a href="{{ url('admin/result_view?award='.$needStr.'&num='.$num.'&export=download') }}">
+                        <button type="button" class="btn btn-primary">导出当前</button>
+                    </a>
+                </div>
+                @else
+                @endif
             </div>
         </form>
     </div>
@@ -61,7 +70,16 @@
                 <div class="alert alert-wrong" role="alert"><h3><b>暂无数据</b><br/>如的确产生了数据，请联系管理员</h3></div>
             @else
                 @foreach($data as $key => $val)
-                    <div class="col-md-3 col-xs-12 clearfix"><div class="panel panel-primary">
+                    @if($max+1 == 1)
+                        <div class="col-md-12 col-xs-12 clearfix"><div class="panel panel-primary">
+                    @elseif($max+1 == 2)
+                        <div class="col-md-6 col-xs-12 clearfix"><div class="panel panel-primary">
+                    @elseif($max+1 == 3)
+                        <div class="col-md-4 col-xs-12 clearfix"><div class="panel panel-primary">
+                    @else
+                        <div class="col-md-3 col-xs-12 clearfix"><div class="panel panel-primary">
+                    @endif
+
                             <div class="panel-heading"><h4><b>{{ config('sjjs_awardSetting.award'.$need[$key]) }}</b></h4></div>
                             <div class="panel-body">
                                 @if($num > 0)

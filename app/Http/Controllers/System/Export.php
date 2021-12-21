@@ -2,24 +2,33 @@
 
 namespace App\Http\Controllers\System;
 
-use App\Exports\EvaluationResultExport;
+use App\Exports\EvaluationResultExport\EvaluationResultExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Export extends Controller
 {
     /**
      * @param $data
-     * @param $need
+     * @param $max
      * @param $fileName
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      * 格式化并导出为excel
      */
-    public function EvaluationResultToExcel($data, $need, $fileName): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    public function EvaluationResultToExcel($data, $max, $fileName): BinaryFileResponse
     {
-//        $export = $data;
-        $export = new EvaluationResultExport($data);
+        $re = Array();
+
+        foreach($data as $key=>$val)
+        {
+            array_unshift($val, ['排名','姓名','得票数']);
+            $re[] = $val;
+        }
+
+        $export = new EvaluationResultExport($re, $max);
         return Excel::download($export, $fileName);
     }
 }
