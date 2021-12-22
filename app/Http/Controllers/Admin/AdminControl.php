@@ -26,6 +26,23 @@ class AdminControl extends Controller
             $result = $func->evaluationStatus($request['val-1']);
         }
 
+        elseif($request['cmd'] == 'makeNewUserListAndPush' &&
+            !empty($request['val-1']) &&
+            !empty($request['val-2']) &&
+            !empty($request['val-3']) &&
+            !empty($request['val-4']) &&
+            !empty($request['val-5']) &&
+            !empty($request['val-6']))
+        {
+            $func->pushEvaluationUser($func->newEvaluationUser((int)$request['val-1'],
+                (int)$request['val-2'],
+                (int)$request['val-3'],
+                (int)$request['val-4'],
+                (int)$request['val-5'],
+                (int)$request['val-6']));
+            $result = 1;
+        }
+
         else
             $result = 0;
 

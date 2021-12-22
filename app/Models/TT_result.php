@@ -18,6 +18,11 @@ class TT_result extends Model
     protected $table = "TT_result";
     const CREATED_AT = 'upload_at';
 
+    /**
+     * @param $uid
+     * @param $awardTidData
+     * @return int
+     */
     public function UpdateOneByUidTid($uid,$awardTidData): int
     {
 //        try{
@@ -38,8 +43,17 @@ class TT_result extends Model
 //            return 0;
 //        }
     }
+
+    /**
+     * @return mixed
+     */
     public function GetAllData()
     {
         return $this->Get();
+    }
+
+    public function DelAll()
+    {
+        $this->truncate();
     }
 }

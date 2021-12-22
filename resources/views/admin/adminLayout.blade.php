@@ -1,11 +1,110 @@
 <!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>交大附中十佳教师评选</title>
+    <title>管理面板</title>
 
     <style type="text/css" >
         .Bg {
@@ -57,7 +156,7 @@
                     <li><a href="{{ url('admin/') }}">管理者首页</a></li>
                     <li><a href="{{ url('admin/config') }}">网站配置</a></li>
                     <li><a href="{{ url('admin/result_view') }}">结果查询</a></li>
-                    <li><a href="{{ url('public/user_regulate') }}">用户管理</a></li>
+                    <li><a href="{{ url('admin/user_regulate') }}">用户管理</a></li>
                     <li><a href="{{ url('public/') }}">评选结果公布</a></li>
                     {{--                    <li class="dropdown">--}}
                     {{--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--}}

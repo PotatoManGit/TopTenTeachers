@@ -11,6 +11,7 @@ use App\Http\Controllers\Test;
 use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\AdminControl;
 use App\Http\Controllers\Admin\ResultView;
+use App\Http\Controllers\Admin\UserRegulate;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,8 @@ Route::any('admin/control/', [AdminControl::class, 'AdminControl'])
 Route::any('admin/result_view', [ResultView::class, 'ResultView'])
     ->middleware('admin_control');
 Route::any('admin/result_view/check', [ResultView::class, 'Check'])
+    ->middleware('admin_control');
+Route::any('admin/user_regulate', [UserRegulate::class, 'UserRegulate'])
     ->middleware('admin_control');
 
 Route::any('/test', [Test::class, "Test"]);
