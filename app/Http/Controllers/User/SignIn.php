@@ -53,8 +53,7 @@ class SignIn extends Controller
         }
         else
         {
-            $check_result = 1;
-            return view('user/signIn', compact('check_result'));
+            return view('user/signIn', ['check_result'=>1, 'cause'=>0]);
         }
     }
 }
