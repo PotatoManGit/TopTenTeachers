@@ -70,7 +70,7 @@ class Control extends Controller
         {
             for($j = 1; $j <= $c2; $j++)
             {
-                $us = 'u' . (100000 + $i*100 + $j);
+                $us = 'u' . (200000 + $i*100 + $j);
                 $str = md5(uniqid());
                 $key = substr($str,-6);
                 $ps = 'p' . $key;
@@ -81,7 +81,7 @@ class Control extends Controller
         {
             for($j = 1; $j <= $c3; $j++)
             {
-                $us = 'u' . (100000 + $i*100 + $j);
+                $us = 'u' . (300000 + $i*100 + $j);
                 $str = md5(uniqid());
                 $key = substr($str,-6);
                 $ps = 'p' . $key;
