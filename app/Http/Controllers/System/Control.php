@@ -5,7 +5,6 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use App\Models\TT_result;
 use App\Models\TT_user;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -63,7 +62,7 @@ class Control extends Controller
                 $str = md5(uniqid());
                 $key = substr($str,-6);
                 $ps = 'p' . $key;
-                $re[] = ['username'=>$us, 'password'=>$ps];
+                $re[] = [0=>$us, 1=>$ps];
             }
         }
         for($i = 1; $i <= $g2; $i++)
@@ -74,7 +73,7 @@ class Control extends Controller
                 $str = md5(uniqid());
                 $key = substr($str,-6);
                 $ps = 'p' . $key;
-                $re[] = ['username'=>$us, 'password'=>$ps];
+                $re[] = [0=>$us, 1=>$ps];
             }
         }
         for($i = 1; $i <= $g3; $i++)
@@ -85,13 +84,16 @@ class Control extends Controller
                 $str = md5(uniqid());
                 $key = substr($str,-6);
                 $ps = 'p' . $key;
-                $re[] = ['username'=>$us, 'password'=>$ps];
+                $re[] = [0=>$us, 1=>$ps];
             }
         }
         unset($re[0]);
         return $re;
     }
 
+    /**
+     * @param $evaluationUser
+     */
     public function pushEvaluationUser($evaluationUser)
     {
         $db = new TT_user();
@@ -99,5 +101,33 @@ class Control extends Controller
         $db->PushNewUserList($evaluationUser);
         $db = new TT_result();
         $db->DelAll();
+    }
+
+    /**
+     * @param $uid
+     * @return int
+     */
+    public function delAdmin($uid): int
+    {
+        $db = new TT_user();
+        $max = 0;
+        foreach($db->GetAdmin() as $key=>$val)
+        {
+            $max = $key;
+        }
+
+        if($max < 1)
+        {
+            echo '<script language="JavaScript">;alert("请至少保留一个管理员账号");
+                    location.href="/admin/user_regulate";</script>;';
+            return 0;
+        }
+
+
+        else
+        {
+            $db->DelAdmin($uid);
+            return 1;
+        }
     }
 }

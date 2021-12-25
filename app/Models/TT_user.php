@@ -111,8 +111,42 @@ class TT_user extends Model
     {
         foreach($UserList as $user)
         {
-            $this->insert(['username'=>$user['username'],
-                'password'=>$user['password']]);
+            $this->insert(['username'=>$user[0],
+                'password'=>$user[1]]);
         }
+    }
+
+    /**
+     * @param $adminUsername
+     * @param $adminPassword
+     * @param $type
+     */
+    public function AddAdmin($adminUsername, $adminPassword, $type)
+    {
+        if($this->where('username', $adminUsername)->first() == null)
+        {
+            $this->insert(['username'=>$adminUsername, 'password'=>$adminPassword, 'type'=>$type]);
+        }
+        else
+        {
+            $this->where('username', $adminUsername)
+                ->update(['password' => $adminPassword]);
+        }
+    }
+
+    /**
+     * @param $uid
+     */
+    public function DelAdmin($uid)
+    {
+        $this->where('uid', $uid)->delete();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function GetAdmin()
+    {
+        return $this->where('type', 777)->get();
     }
 }

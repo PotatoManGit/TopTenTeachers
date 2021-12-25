@@ -46,5 +46,9 @@ Route::any('admin/result_view/check', [ResultView::class, 'Check'])
     ->middleware('admin_control');
 Route::any('admin/user_regulate', [UserRegulate::class, 'UserRegulate'])
     ->middleware('admin_control');
+Route::any('admin/user_regulate/new_evaluation_user', [UserRegulate::class, 'NewEvaluationUser'])
+    ->middleware('admin_control');
+Route::any('admin/user_regulate/add_admin', [UserRegulate::class, 'AddAdmin'])
+    ->middleware('admin_control');
 
 Route::any('/test', [Test::class, "Test"]);

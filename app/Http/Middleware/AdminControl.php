@@ -36,7 +36,9 @@ class AdminControl
 
         $truePassword = $db->CheckCookie($uid);
 
-        if($truePassword == $password && $db->GetUserType($uid) == config('sjjs_userSystem.admin_user_type'))
+        $dbd = $db->GetUserType($uid);
+
+        if($truePassword == $password && ($dbd == null || $dbd == config('sjjs_userSystem.admin_user_type')))
         {
             return $next($request);
         }

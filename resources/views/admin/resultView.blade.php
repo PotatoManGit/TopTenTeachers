@@ -91,7 +91,7 @@
 
                             <table class="table hover">
                                 <tr style="text-align: center">
-                                    <th>序号</th>
+                                    <th>#</th>
                                     <th>排名</th>
                                     <th>姓名</th>
                                     <th>总票</th>

@@ -43,6 +43,11 @@ class AdminControl extends Controller
             $result = 1;
         }
 
+        elseif($request['cmd'] == 'del_admin' && !empty($request['val-1']))
+        {
+            $result = $func->delAdmin((int)$request['val-1']);
+        }
+
         else
             $result = 0;
 

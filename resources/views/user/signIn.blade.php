@@ -24,7 +24,7 @@
                     <input type="text" class="form-control" name="username"
                            aria-describedby="basic-addon3" placeholder="用户名"
                            required
-                           pattern="[A-Za-z0-9]{7}" title="用户名输入格式错误，请检查后输入">
+                           pattern="[A-Za-z0-9]{0-15}" title="用户名输入格式错误，请检查后输入">
                 </div>
 
                 <div class="input-group col-xs-4">
@@ -32,7 +32,7 @@
                     <input type="text" class="form-control" name="password"
                            aria-describedby="basic-addon3" placeholder="密码"
                            required
-                           pattern="[A-Za-z0-9]{7}" title="密码输入格式错误，请检查后输入">
+                           pattern="[A-Za-z0-9]{0-15}" title="密码输入格式错误，请检查后输入">
                 </div>
 {{--                <input type="text" name="username" class="formInputStyle_01"--}}
 {{--                       required--}}
