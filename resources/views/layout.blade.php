@@ -48,6 +48,56 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
@@ -145,15 +195,16 @@
 <div class="container page_center">
     @yield('content')
 </div>
-<footer class="footer navbar-fixed-bottom ">
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                Made By 子雨工作室 PotatoMan
-            </div>
-        </div>
-    </div>
-</footer>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+{{--<footer class="footer navbar-fixed-bottom ">--}}
+{{--    <div class="container">--}}
+{{--        <div class="panel panel-default">--}}
+{{--            <div class="panel-body">--}}
+{{--                Made By 子雨工作室 PotatoMan--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</footer>--}}
 
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>

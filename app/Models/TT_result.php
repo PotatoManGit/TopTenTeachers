@@ -52,8 +52,12 @@ class TT_result extends Model
         return $this->Get();
     }
 
+    /**
+     *
+     */
     public function DelAll()
     {
         $this->truncate();
     }
+
 }

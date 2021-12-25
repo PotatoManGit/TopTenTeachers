@@ -6,6 +6,7 @@ use App\Exports\EvaluationResultExport\EvaluationResultExport\EvaluationResultEx
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\DataProcessing;
 use App\Http\Controllers\System\Export;
+use App\Models\TT_result;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -22,6 +23,15 @@ class ResultView extends Controller
 {
     public function ResultView(Request $request)
     {
+        if(!empty($request['do']) && $request['do'] == '1')
+            return redirect('admin/result_view');
+
+        if(!empty($request['del']) && $request['del'] == '1')
+        {
+            echo '<script language="JavaScript">;alert("此操作会删除全部评教记录!确实要删除吗");
+                    location.href="/admin/control?cmd=delAllEvaluationData";</script>;';
+            return 0;
+        }
         if(empty($request['award']) || empty($request['num']))
         {
             $strIn = '';

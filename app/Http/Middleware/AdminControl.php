@@ -38,7 +38,11 @@ class AdminControl
 
         $dbd = $db->GetUserType($uid);
 
-        if($truePassword == $password && ($dbd == null || $dbd == config('sjjs_userSystem.admin_user_type')))
+        if($dbd === null)
+        {
+            return redirect('/user/sign_in?cause=0');
+        }
+        elseif($truePassword == $password && $dbd == config('sjjs_userSystem.admin_user_type'))
         {
             return $next($request);
         }

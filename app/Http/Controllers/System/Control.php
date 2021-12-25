@@ -107,7 +107,7 @@ class Control extends Controller
      * @param $uid
      * @return int
      */
-    public function delAdmin($uid): int
+    public function delUser($uid): int
     {
         $db = new TT_user();
         $max = 0;
@@ -126,8 +126,17 @@ class Control extends Controller
 
         else
         {
-            $db->DelAdmin($uid);
+            $db->DelUser($uid);
             return 1;
         }
+    }
+
+    public function delAllEvaluationData()
+    {
+        $dbR = new TT_result();
+        $dbU = new TT_user();
+
+        $dbU->DelAllEvaluationData();
+        $dbR->DelAll();
     }
 }

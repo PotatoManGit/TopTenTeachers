@@ -20,7 +20,7 @@ class UserEvaluation extends Controller
 
     public function UserEvaluation(Request $request)
     {
-        if(empty($request['award']))
+        if(empty($request['award'])) //点击入口访问后初始化
         {
             return redirect('user/evaluation?award=1&status=op');
         }
@@ -28,7 +28,7 @@ class UserEvaluation extends Controller
 //        {
 //            return redirect('/user/evaluation/check/?status=1');
 //        }
-        elseif(!empty($request['status']) && $request['status'] == 're_check')
+        elseif(!empty($request['status']) && $request['status'] == 're_check') //核实页面提交
         {
             $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
             setcookie('award'.($request['award']), Crypt::encryptString($_POST['choice']), $coTime, '/');
@@ -38,7 +38,7 @@ class UserEvaluation extends Controller
             }
             return redirect('user/evaluation/check?status=1');
         }
-        elseif(!empty($request['status']) && $request['status'] == 're')
+        elseif(!empty($request['status']) && $request['status'] == 're') //定位到特定奖项
         {
             if(!empty($_COOKIE['award'.$request['award']]))
             {
@@ -49,14 +49,14 @@ class UserEvaluation extends Controller
                 return $this->makeWeb((int)$request['award'], -1);
             }
         }
-        elseif(!empty($request['status']) && $request['status'] == 'op')
+        elseif(!empty($request['status']) && $request['status'] == 'op') //检测到入口，判断是否评价
         {
             if(!empty($_COOKIE['award'.$request['award']]))
                 return $this->makeWeb((int)$request['award'], 2);
             else
                 return $this->makeWeb((int)$request['award'], 0);
         }
-        elseif(!empty($_COOKIE['award'.$request['award']]))
+        elseif(!empty($_COOKIE['award'.$request['award']])) //判断是否评价
         {
             return $this->makeWeb((int)$request['award'], 2);
         }
@@ -66,7 +66,7 @@ class UserEvaluation extends Controller
             {
                 return $this->makeWeb((int)$request['award'] - 1, 1);
             }
-            else
+            else //每次评选完提交
             {
                 $coTime = time()+config('sjjs_userSystem.cookieHoldTime_saveChoice');
                 setcookie('award'.($request['award'] - 1), Crypt::encryptString($_POST['choice']), $coTime, '/');
@@ -83,7 +83,7 @@ class UserEvaluation extends Controller
     {
         $db = new TT_teacher();
 
-        if(!empty($_COOKIE['award'.$awardId]) && ($status == 2 || $status == -2))
+        if(!empty($_COOKIE['award'.$awardId]) && ($status == 2 || $status == -2)) //获取tid，如果已评价返回，未评级警告
         {
             $tid = (int)Crypt::decryptString($_COOKIE['award' . $awardId]);
             $teacherChose = $db->GetNameByTid($tid);

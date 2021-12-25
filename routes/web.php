@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\AdminControl;
 use App\Http\Controllers\Admin\ResultView;
 use App\Http\Controllers\Admin\UserRegulate;
+use App\Http\Controllers\Admin\SystemConfigured;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,7 +49,9 @@ Route::any('admin/user_regulate', [UserRegulate::class, 'UserRegulate'])
     ->middleware('admin_control');
 Route::any('admin/user_regulate/new_evaluation_user', [UserRegulate::class, 'NewEvaluationUser'])
     ->middleware('admin_control');
-Route::any('admin/user_regulate/add_admin', [UserRegulate::class, 'AddAdmin'])
+Route::any('admin/user_regulate/add_admin', [UserRegulate::class, 'AddUser'])
+    ->middleware('admin_control');
+Route::any('admin/config', [SystemConfigured::class, 'SystemConfigured'])
     ->middleware('admin_control');
 
 Route::any('/test', [Test::class, "Test"]);

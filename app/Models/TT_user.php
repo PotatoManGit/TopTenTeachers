@@ -116,28 +116,28 @@ class TT_user extends Model
         }
     }
 
-    /**
-     * @param $adminUsername
-     * @param $adminPassword
-     * @param $type
-     */
-    public function AddAdmin($adminUsername, $adminPassword, $type)
-    {
-        if($this->where('username', $adminUsername)->first() == null)
-        {
-            $this->insert(['username'=>$adminUsername, 'password'=>$adminPassword, 'type'=>$type]);
-        }
-        else
-        {
-            $this->where('username', $adminUsername)
-                ->update(['password' => $adminPassword]);
-        }
-    }
+//    /**
+//     * @param $adminUsername
+//     * @param $adminPassword
+//     * @param $type
+//     */
+//    public function AddAdmin($adminUsername, $adminPassword, $type)
+//    {
+//        if($this->where('username', $adminUsername)->first() == null)
+//        {
+//            $this->insert(['username'=>$adminUsername, 'password'=>$adminPassword, 'type'=>$type]);
+//        }
+//        else
+//        {
+//            $this->where('username', $adminUsername)
+//                ->update(['password' => $adminPassword]);
+//        }
+//    }
 
     /**
      * @param $uid
      */
-    public function DelAdmin($uid)
+    public function DelUser($uid)
     {
         $this->where('uid', $uid)->delete();
     }
@@ -148,5 +148,45 @@ class TT_user extends Model
     public function GetAdmin()
     {
         return $this->where('type', 777)->get();
+    }
+
+    /**
+     * @param $username
+     * @param $password
+     * @param $type
+     * @param $do
+     * @return bool
+     */
+    public function AddUser($username, $password, $type, $do):bool
+    {
+        $tmp = $this->where('username', $username)->first();
+        if($tmp != null && $do == 1)
+        {
+            return 0;
+        }
+        elseif($do == 2)
+        {
+            $this->where('username', $username)->update(['password'=>$password, 'type'=>$type]);
+            return 1;
+        }
+        else
+        {
+            $this->insert(['username'=>$username, 'password'=>$password, 'type'=>$type]);
+            return 1;
+        }
+    }
+
+    /**
+     * @param $num
+     * @return mixed
+     */
+    public function GetAllDataToPaging($num)
+    {
+        return $this->paginate($num);
+    }
+
+    public function DelAllEvaluationData()
+    {
+        $this->where('status', 2)->update(['status'=>0, 'finish_time'=>null]);
     }
 }

@@ -10,13 +10,10 @@
 {{--        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>--}}
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default ">
         <form class="form-inline" method="post" action="{{ url('admin/result_view/check') }}">
             @csrf
-            <div class="panel-body container-fluid">
-                <div class="col-md-1 clearfix">
-                    <h4>筛选:</h4>
-                </div>
+            <div class="panel-body container-fluid ">
                 <div class="btn-group col-md-2 clearfix form-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         请选择输出的奖项 <span class="caret"></span>
@@ -24,19 +21,24 @@
                     <ul class="dropdown-menu">
                         <center>
                             <li>
-                                <label for="-1">
-                                    <h4>全部</h4>
-                                </label>
-                                <input id="-1" name="award[]" type="checkbox" value="-1" style="zoom: 120%">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="award[]" value="-1" type="checkbox">
+                                        全部
+                                    </label>
+                                </div>
                             </li>
                         </center>
                         @for($i = 1; $i <= config('sjjs_awardSetting.awardNum'); $i++)
                             <center>
                                 <li>
-                                    <label for="{{ $i }}">
-                                        <h4>{{ config(('sjjs_awardSetting.award'.$i)) }}</h4>
-                                    </label>
-                                    <input id="{{ $i }}" name="award[]" type="checkbox" value="{{ $i }}" style="zoom: 120%">
+                                    <div class="checkbox">
+                                        <label for="{{ $i }}">
+                                            <input name="award[]" type="checkbox" value="{{ $i }}">
+                                            {{ config(('sjjs_awardSetting.award'.$i)) }}
+                                        </label>
+                                    </div>
+
                                 </li>
                             </center>
                         @endfor
@@ -45,7 +47,7 @@
                 <div class="col-md-7 clearfix form-group">
 
                     <label for="num">
-                        <h4>输入需要输出结果的前多少名（默认输出全部）</h4>
+                        <h4>输入需要输出结果的前多少名(默认输出全部)</h4>
                     </label>
                     <input id="num" type="text" name="num" class="form-control" placeholder="请输入数据">
                 </div>
@@ -60,6 +62,11 @@
                 </div>
                 @else
                 @endif
+                <div class="co-md-1 form-group">
+                    <a href="{{ url('admin/result_view?del=1') }}">
+                        <button type="button" class="btn btn-primary">删除所有数据</button>
+                    </a>
+                </div>
             </div>
         </form>
     </div>
