@@ -74,7 +74,7 @@
             <!-- Default panel contents -->
             <div class="panel-heading">生成用户名，密码</div>
             <div class="panel-body">
-                <h3><b>此次操作会覆盖数据库非管理员用户数据，请谨慎操作</b></h3>
+                <h3><b>此次操作会覆盖数据库非管理员用户数据，请谨慎操作</b><a href="http://sjjs.doc.ziyustudio.com/2604617">[说明文档]</a></h3>
             </div>
             <form method="post" action="{{ url('admin/user_regulate/new_evaluation_user') }}">
                 @csrf
@@ -136,12 +136,9 @@
             <!-- Default panel contents -->
             <div class="panel-heading">管理用户</div>
             <div class="panel-body">
-                <h3>添加管理员；下载用户名密码列表</h3>
+                <h3>管理用户；下载用户名密码列表</h3>
             </div>
             <ul class="list-group">
-                <li class="list-group-item">
-                    <b>用户用户名密码列表下载</b>
-                </li>
                 <li class="list-group-item">
                     <div class="btn-group" style="text-align: center;" role="group" aria-label="...">
                         <a href="{{ url('admin/user_regulate?export=1') }}">
@@ -150,6 +147,7 @@
                             <button type="submit" class="btn btn-primary">下载高二用户列表</button></a>
                         <a href="{{ url('admin/user_regulate?export=3') }}">
                             <button type="submit" class="btn btn-primary">下载高三用户列表</button></a>
+                        <a href="http://sjjs.doc.ziyustudio.com/2604617" style="font-size: 17px">[说明文档]</a>
                     </div>
                 </li>
                 <li class="list-group-item">
@@ -170,7 +168,7 @@
                     </table>
                 </li>
                 <li class="list-group-item">
-                    <h4>输入已存在或不存在用户名，修改密码权限或新建用户</h4>
+                    <h4>输入已存在或不存在用户名，修改或新建用户 <a href="http://sjjs.doc.ziyustudio.com/2604617">[说明文档]</a></h4>
                 </li>
                 <form method="post" action="{{ url('admin/user_regulate/add_admin') }}">
                     @csrf

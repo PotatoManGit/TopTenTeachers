@@ -11,7 +11,7 @@
     </div>
 
     <div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">现在评教状态</div>
                 @if($evaluationStatus == 1)
@@ -26,7 +26,7 @@
                 @endif
             </div>
         </div>
-        <div class="col-md-3 col-md-offset-1">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">快捷操作</div>
                 <div class="panel-body">

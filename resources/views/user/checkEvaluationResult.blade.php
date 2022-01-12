@@ -39,6 +39,5 @@
 <center><a href="{{ url('user/evaluation/check?status=2') }}"><section>
             <p><button type="button" class="btn btn-default">确认提交</button> </p>
         </section></a></center>
-    <br/><br/><br/><br/><br/><br/><br/>
 
 @stop
