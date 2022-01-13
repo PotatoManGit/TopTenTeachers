@@ -158,12 +158,14 @@
                         <tr>
                             <th>#</th>
                             <th>用户名</th>
+                            <th>密码</th>
                             <th>操作</th>
                         </tr>
                         @foreach($adminData as $key=>$val)
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $val->username }}</td>
+                                <td><a href="javascript:alert('该用户的密码是：{{ $val->password }}')">查看密码</a></td>
                                 <td><a href="{{ url('admin/control?cmd=del_user&val-1='.$val->uid) }}">删除</a></td>
                             </tr>
                         @endforeach
