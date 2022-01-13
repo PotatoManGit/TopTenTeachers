@@ -23,6 +23,7 @@
                     <tr>
                         <th>#</th>
                         <th>用户名</th>
+                        <th>密码</th>
                         <th>权限</th>
                         <th>上次登录时间</th>
                         <th>是否完成评教</th>
@@ -33,6 +34,7 @@
                         <tr>
                             <td>{{ $key+1+($page-1)*10 }}</td>
                             <td>{{ $val->username }}</td>
+                            <td><a href="javascript:alert('该用户的密码是：{{ $val->password }}')">查看密码</a></td>
                             <td>
                                 @if($val->type == config('sjjs_userSystem.admin_user_type'))
                                     管理员
