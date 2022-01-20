@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-6">
             <div class="panel panel-primary">
-                <div class="panel-heading">快捷操作</div>
+                <div class="panel-heading">管理面板</div>
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
                         <li role="presentation"><a href="{{ url('/admin/control?cmd=evaluationStatus&val-1=run') }}">开始评教</a></li>

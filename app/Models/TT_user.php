@@ -185,8 +185,20 @@ class TT_user extends Model
         return $this->paginate($num);
     }
 
+    /**
+     *
+     */
     public function DelAllEvaluationData()
     {
         $this->where('status', 2)->update(['status'=>0, 'finish_time'=>null]);
+    }
+
+    /**
+     * @param $uid
+     * @return mixed
+     */
+    public function GetUsernameByUid($uid)
+    {
+        return $this->where('uid', $uid)->value('username');
     }
 }

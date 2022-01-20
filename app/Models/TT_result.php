@@ -60,4 +60,21 @@ class TT_result extends Model
         $this->truncate();
     }
 
+
+    /**
+     * @param $num
+     * @return mixed
+     */
+    public function GetAllDataToPaging($num)
+    {
+        return $this->paginate($num);
+    }
+
+    /**
+     * @param $id
+     */
+    public function DelDataById($id)
+    {
+        $this->where('id', $id)->delete();
+    }
 }

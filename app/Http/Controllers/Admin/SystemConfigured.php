@@ -7,9 +7,21 @@ use Illuminate\Http\Request;
 
 class SystemConfigured extends Controller
 {
-    public function SystemConfigured()
+    public function SystemConfigured(Request $request)
     {
-        $file_path = config_path()."/sjjs_awardSetting.php";
+        if(empty($request['status']))
+        {
+            return view('admin/systemConfigured');
+        }
+        else
+        {
+            return $this->DoConfigured();
+        }
+    }
 
+    public function DoConfigured()
+    {
+
+        return 1;
     }
 }

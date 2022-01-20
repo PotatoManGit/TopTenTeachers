@@ -93,7 +93,7 @@
                                                         <li class="list-group-item">
                                                             @if(($status == 2 || $status == -2) && $teacherChose != '0' && $d["tid"] == $tid)
                                                                 <div class="radio">
-                                                                    <label for="title_1">
+                                                                    <label>
                                                                         <input type="radio" id="{{ $d["tid"] }}" checked
                                                                                name="choice" value="{{ $d["tid"] }}">
                                                                         {{ $d["name"] }}
@@ -101,7 +101,7 @@
                                                                 <div class="radio">
                                                             @else
                                                                 <div class="radio">
-                                                                    <label for="title_1">
+                                                                    <label>
                                                                         <input type="radio" id="{{ $d["tid"] }}"
                                                                                name="choice" value="{{ $d["tid"] }}">
                                                                         {{ $d["name"] }}

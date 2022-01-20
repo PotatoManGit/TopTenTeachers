@@ -2,6 +2,10 @@
 
 @section("content_admin")
 
+    <head>
+        <meta charset="UTF-8">
+        <title>结果查询</title>
+    </head>
     <div class="jumbotron" style="text-align: center">
         <h1>数据查询和导出</h1>
         <p>在此处实时查询此次评教的数据</p>

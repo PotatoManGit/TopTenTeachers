@@ -19,11 +19,18 @@ class TT_teacher extends Model
     public $timestamps = false;
     protected $primaryKey = 'tid';
 
+    /**
+     * @return mixed
+     */
     public function GetAll()
     {
         return $this->get();
     }
 
+    /**
+     * @param $tid
+     * @return mixed
+     */
     public function GetNameByTid($tid)
     {
         return $this->where('tid', $tid)->value('name');

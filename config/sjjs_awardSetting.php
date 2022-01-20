@@ -4,7 +4,7 @@
  */
 
 return [
-    'awardNum' => '10',
+    'awardNum' => 10,
     'award1' => 'test1',
     'award2' => 'test2',
     'award3' => 'test3',

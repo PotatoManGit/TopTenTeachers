@@ -54,6 +54,11 @@ class AdminControl extends Controller
             $result = 1;
         }
 
+        elseif($request['cmd'] == 'delEvaluationDataById' && !empty($request['val-1']))
+        {
+            $result = $func->delEvaluationDataById((int)$request['val-1']);
+        }
+
         else
             $result = 0;
 

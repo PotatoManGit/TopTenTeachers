@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\AdminControl;
 use App\Http\Controllers\Admin\ResultView;
 use App\Http\Controllers\Admin\UserRegulate;
 use App\Http\Controllers\Admin\SystemConfigured;
+use App\Http\Controllers\Admin\RecordView;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,7 +53,10 @@ Route::any('admin/user_regulate/new_evaluation_user', [UserRegulate::class, 'New
     ->middleware('admin_control');
 Route::any('admin/user_regulate/add_admin', [UserRegulate::class, 'AddUser'])
     ->middleware('admin_control');
-Route::any('admin/config', [SystemConfigured::class, 'SystemConfigured'])
+//Route::any('admin/config', [SystemConfigured::class, 'SystemConfigured'])
+//    ->middleware('admin_control');
+Route::any('admin/record_view', [RecordView::class, 'RecordView'])
     ->middleware('admin_control');
+
 
 Route::any('/test', [Test::class, "Test"]);

@@ -156,7 +156,7 @@
                     <li><a href="{{ url('admin/config') }}">网站配置</a></li>
                     <li><a href="{{ url('admin/result_view') }}">结果查询</a></li>
                     <li><a href="{{ url('admin/user_regulate') }}">用户管理</a></li>
-                    <li><a href="{{ url('public/') }}">评选结果公布</a></li>
+                    <li><a href="{{ url('admin/record_view') }}">评教记录查询</a></li>
                     {{--                    <li class="dropdown">--}}
                     {{--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--}}
                     {{--                        <ul class="dropdown-menu">--}}

@@ -17,8 +17,8 @@
                 <div class="btn-group" style="text-align: center;" role="group" aria-label="...">
                     <p><a class="btn btn-primary btn-lg" href="{{ url('user/evaluation') }}" role="button">开始</a></p>
                 </div>
+            <p>进入评教后请选择您认为最合适某一称号的老师</p>
         @endif
-        <p>进入评教后请选择您认为最合适某一称号的老师</p>
         {{--        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>--}}
     </div>
 

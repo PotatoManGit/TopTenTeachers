@@ -123,20 +123,37 @@ class Control extends Controller
             return 0;
         }
 
-
         else
         {
+            echo '<script language="JavaScript">;alert("确认要删除吗？");
+                    location.href="#";</script>;';
             $db->DelUser($uid);
             return 1;
         }
     }
 
+    /**
+     *
+     */
     public function delAllEvaluationData()
     {
         $dbR = new TT_result();
         $dbU = new TT_user();
-
+        echo '<script language="JavaScript">;alert("确认要删除吗？");
+                    location.href="#";</script>;';
         $dbU->DelAllEvaluationData();
         $dbR->DelAll();
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function delEvaluationDataById($id): bool
+    {
+        echo '<script language="JavaScript">;alert("确认要删除吗？");
+                    location.href="#";</script>;';
+        (new TT_result())->DelDataById($id);
+        return 1;
     }
 }
