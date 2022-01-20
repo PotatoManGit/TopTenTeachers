@@ -103,7 +103,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="https://www-potatost-user.oss-cn-hangzhou.aliyuncs.com/snowManImg/logo.png">
+    <link rel="icon" href="https://www-potatost-user.oss-cn-hangzhou.aliyuncs.com/TopTenTeachers/logo.png">
     <title>交大附中十佳教师评选</title>
 
     <style type="text/css" >
@@ -153,7 +153,7 @@
                     <li><a href="/">首页</a></li>
                     <li><a href="{{ url('user/') }}">评选者入口</a></li>
                     <li><a href="{{ url('admin/') }}">管理者入口</a></li>
-                    <li><a href="{{ url('public/') }}">评选结果公布</a></li>
+{{--                    <li><a href="{{ url('public/') }}">评选结果公布</a></li>--}}
 {{--                    <li class="dropdown">--}}
 {{--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--}}
 {{--                        <ul class="dropdown-menu">--}}

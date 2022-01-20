@@ -103,7 +103,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="https://www-potatost-user.oss-cn-hangzhou.aliyuncs.com/snowManImg/logo.png">
+    <link rel="icon" href="https://www-potatost-user.oss-cn-hangzhou.aliyuncs.com/TopTenTeachers/logo.png">
 
     <title>管理面板</title>
 
@@ -153,7 +153,7 @@
                     {{--                    <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>--}}
                     <li><a href="/">首页</a></li>
                     <li><a href="{{ url('admin/') }}">管理者首页</a></li>
-                    <li><a href="{{ url('admin/config') }}">网站配置</a></li>
+{{--                    <li><a href="{{ url('admin/config') }}">网站配置</a></li>--}}
                     <li><a href="{{ url('admin/result_view') }}">结果查询</a></li>
                     <li><a href="{{ url('admin/user_regulate') }}">用户管理</a></li>
                     <li><a href="{{ url('admin/record_view') }}">评教记录查询</a></li>
