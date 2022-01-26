@@ -66,9 +66,9 @@ class UserRegulate extends Controller
             }
             else
             {
-                $make->evaluationStatus('stop');
                 return '<script language="JavaScript">;alert("评教进行中执行此操作将会造成评教系统错误，点击确认停止评教");
                     location.href="/admin/user_regulate/new_evaluation_user";</script>;';
+                $make->evaluationStatus('stop');
             }
         }
         elseif($request['step'] == 2)

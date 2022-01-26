@@ -105,47 +105,47 @@ class DataProcessing extends Controller
         return $formativeResult;
     }
 
-    /**
-     * @param $data
-     * @param $need
-     * @return string
-     * 生成符合excel导出要求的HTML字符串
-     */
-    public function DataFormattingCsv($data, $need, $num): string
-    {
-        $text = "<html xmlns:x='urn:schemas-microsoft-com:office:excel'>";//设置html输出格式
-        $text.= "<body><table><tr>";
-
-        if($num != $this->FinishEvaluationNum() && $num > 0)
-            $tmp = '（部分数据）';
-        else
-            $tmp = '';
-
-        foreach($data as $key=>$val)
-        {
-            $text.= "<td>".config('sjjs_awardSetting.award'.$need[$key])."$tmp</td>";
-        }
-
-        $text.= "</tr><tr>";
-        foreach($need as $key=>$ne)
-        {
-            $text.= "<td x:str><table><tr><td>编号</td><td>排名</td><td>姓名</td><td>得票</td></tr>";
-            foreach($data[$key] as $num=>$val)
-            {
-
-
-                $text.="<tr><td>".$num."</td><td>".$val[0]['ranking']."</td><td>".$val[0]['name'].
-                    "</td><td>".$val[0]['vote']."</td></tr>";
-
-            }
-
-            $text.="</table></td>";
-        }
-
-        $text.= "</tr></table></body></html>";
-
-        return $text;
-    }
+//    /**
+//     * @param $data
+//     * @param $need
+//     * @return string
+//     * 生成符合excel导出要求的HTML字符串
+//     */
+//    public function DataFormattingCsv($data, $need, $num): string
+//    {
+//        $text = "<html xmlns:x='urn:schemas-microsoft-com:office:excel'>";//设置html输出格式
+//        $text.= "<body><table><tr>";
+//
+//        if($num != $this->FinishEvaluationNum() && $num > 0)
+//            $tmp = '（部分数据）';
+//        else
+//            $tmp = '';
+//
+//        foreach($data as $key=>$val)
+//        {
+//            $text.= "<td>".config('sjjs_awardSetting.award'.$need[$key])."$tmp</td>";
+//        }
+//
+//        $text.= "</tr><tr>";
+//        foreach($need as $key=>$ne)
+//        {
+//            $text.= "<td x:str><table><tr><td>编号</td><td>排名</td><td>姓名</td><td>得票</td></tr>";
+//            foreach($data[$key] as $num=>$val)
+//            {
+//
+//
+//                $text.="<tr><td>".$num."</td><td>".$val[0]['ranking']."</td><td>".$val[0]['name'].
+//                    "</td><td>".$val[0]['vote']."</td></tr>";
+//
+//            }
+//
+//            $text.="</table></td>";
+//        }
+//
+//        $text.= "</tr></table></body></html>";
+//
+//        return $text;
+//    }
 
     /**
      * @param $aim

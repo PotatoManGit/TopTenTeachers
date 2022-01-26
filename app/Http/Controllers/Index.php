@@ -39,5 +39,6 @@ class Index extends Controller
 //        }
 
         return view('index');
+//        return redirect('user');
     }
 }
