@@ -11,16 +11,19 @@ class EvaluationResultExportOne implements FromArray,WithTitle
 {
     protected $data;
     protected $now;
+    protected $index;
 
     /**
      * EvaluationResultExport constructor.
      * @param array $data
      * @param int $now
+     * @param int $index
      */
-    public function __construct(array $data, int $now)
+    public function __construct(array $data, int $now, int $index)
     {
         $this->data = $data;
         $this->now = $now;
+        $this->index = $index;
     }
 
     /**
@@ -33,6 +36,6 @@ class EvaluationResultExportOne implements FromArray,WithTitle
 
     public function title(): string
     {
-        return config(('sjjs_awardSetting.award'.($this->now+1)));
+        return config(('sjjs_awardSetting.award'.($this->index)));
     }
 }

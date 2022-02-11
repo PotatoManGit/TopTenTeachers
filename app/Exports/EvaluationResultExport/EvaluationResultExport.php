@@ -19,11 +19,13 @@ class EvaluationResultExport implements WithMultipleSheets
 
     protected $data;
     protected $max;
+    protected $need;
 
-    public function __construct(array $data, int $max)
+    public function __construct(array $data, int $max, array $need)
     {
         $this->max = $max;
         $this->data = $data;
+        $this->need = $need;
     }
 
     /**
@@ -33,8 +35,9 @@ class EvaluationResultExport implements WithMultipleSheets
     {
         $sheets = [];
 
-        for ($now = 0; $now < $this->max; $now++) {
-            $sheets[] = new EvaluationResultExportOne($this->data, $now);
+        foreach($this->need as $now=>$val)
+        {
+            $sheets[] = new EvaluationResultExportOne($this->data, $now, $val);
         }
 
         return $sheets;

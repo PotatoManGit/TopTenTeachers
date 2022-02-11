@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Facades\Excel;
+use phpDocumentor\Reflection\Types\Never_;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class Export extends Controller
@@ -17,10 +18,11 @@ class Export extends Controller
      * @param $data
      * @param $max
      * @param $fileName
+     * @param $need
      * @return BinaryFileResponse
      * 格式化并导出为excel
      */
-    public function EvaluationResultToExcel($data, $max, $fileName): BinaryFileResponse
+    public function EvaluationResultToExcel($data, $max, $fileName, $need): BinaryFileResponse
     {
         $re = Array();
 
@@ -30,7 +32,7 @@ class Export extends Controller
             $re[] = $val;
         }
 
-        $export = new EvaluationResultExport($re, $max);
+        $export = new EvaluationResultExport($re, $max, $need);
         return Excel::download($export, $fileName);
     }
 

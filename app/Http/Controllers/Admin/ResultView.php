@@ -100,7 +100,7 @@ class ResultView extends Controller
                     $fileName = '部分评教结果.xlsx';
                 else
                     $fileName = '全部评教结果.xlsx';
-                return (new Export())->EvaluationResultToExcel($data, ($max + 1), $fileName);
+                return (new Export())->EvaluationResultToExcel($data, ($max + 1), $fileName, $need);
             }
 
             $type = 1;
