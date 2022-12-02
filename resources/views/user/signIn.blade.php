@@ -29,7 +29,7 @@
 
                 <div class="input-group col-xs-4">
                     <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
-                    <input type="text" class="form-control" name="password"
+                    <input type="password" class="form-control" name="password"
                            aria-describedby="basic-addon3" placeholder="密码"
                            required
                            pattern="[A-Za-z0-9]{0-15}" title="密码输入格式错误，请检查后输入">
