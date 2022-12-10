@@ -4,8 +4,8 @@
 
 #### 是基于laravel框架的教室评价评奖系统
 
-#### emmm已经弃用了，网站也没有用了...
+#### emmm只是自己学校用的...
 
-#### debug网站：http://sjjs.ziyustudio.com
+#### debug网站：http://sjjs.jdfz54.cn
 
-#### debug用户：u189669 密码：p189669
+#### By ZiYuu
