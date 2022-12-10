@@ -20,7 +20,7 @@ class Admin extends Controller
         $makeData = new DataProcessing();
         $allFinishNum = $makeData->FinishEvaluationNum();
 //        $result = $makeData->Result(1, 3);
-        $evaluationStatus = Cache::get('evaluation_status');
+        $evaluationStatus = Cache::get('evaluation_status', 0);
         $cle = time() - Cache::get('evaluation_start_at', 9999999999999999);
 
         // 时间差计算
@@ -30,7 +30,7 @@ class Admin extends Controller
 //        $s = floor(($cle%(3600*24))%60);
 
         $evaluationContinueTime = " $d 天 $h 小时 $m 分";
-
+//        return view('admin/admin');
         return view('admin/admin', compact('allFinishNum', 'evaluationStatus',
             'evaluationContinueTime'));
 //        print("<pre>"); // 格式化输出数组
