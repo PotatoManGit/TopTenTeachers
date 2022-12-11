@@ -63,7 +63,7 @@
                                     {{ date('Y-m-d H:i:s', $val->finish_time) }}
                                 @endif
                             </td>
-                            <td><a href="{{ url('admin/control?cmd=del_user&val-1='.$val->uid) }}">删除</a></td>
+                            <td><button onclick="if(window.confirm('是否要删除该用户？')) location.href='{{ url('admin/control?cmd=del_user&val-1='.$val->uid) }}'">删除</button></td>
                         </tr>
                     @endforeach
                 </table>
@@ -166,7 +166,7 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $val->username }}</td>
                                 <td><a href="javascript:alert('该用户的密码是：{{ $val->password }}')">查看密码</a></td>
-                                <td><a href="{{ url('admin/control?cmd=del_user&val-1='.$val->uid) }}">删除</a></td>
+                                <td><button onclick="if(confirm('是否要删除该用户')) location.href='{{ url('admin/control?cmd=del_user&val-1='.$val->uid) }}'">删除</button></td>
                             </tr>
                         @endforeach
                     </table>

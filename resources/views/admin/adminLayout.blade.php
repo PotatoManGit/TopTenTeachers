@@ -129,6 +129,7 @@
     <!--[if lt IE 9]>
     <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <script stc="{{ @public_path('assets/js/reCheck.js') }}">
     <![endif]-->
 </head>
 <body class="Bg">

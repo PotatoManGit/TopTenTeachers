@@ -110,23 +110,29 @@ class Control extends Controller
     public function delUser($uid): int
     {
         $db = new TT_user();
-        $max = 0;
+        $max = -1;
         foreach($db->GetAdmin() as $key=>$val)
         {
             $max = $key;
         }
 
-        if($max < 1)
+        if($db->GetUserType($uid) == config('sjjs_userSystem.admin_user_type'))
         {
-            echo '<script language="JavaScript">;alert("请至少保留一个管理员账号");
+            if($max == 0)
+            {
+                echo '<script language="JavaScript">;alert("请至少保留一个管理员账号");
                     location.href="/admin/user_regulate";</script>;';
-            return 0;
+                return 0;
+            }
+            else
+            {
+                $db->DelUser($uid);
+                return 1;
+            }
         }
 
         else
         {
-            echo '<script language="JavaScript">;alert("确认要删除吗？");
-                    location.href="#";</script>;';
             $db->DelUser($uid);
             return 1;
         }
@@ -139,8 +145,6 @@ class Control extends Controller
     {
         $dbR = new TT_result();
         $dbU = new TT_user();
-        echo '<script language="JavaScript">;alert("确认要删除吗？");
-                    location.href="#";</script>;';
         $dbU->DelAllEvaluationData();
         $dbR->DelAll();
     }

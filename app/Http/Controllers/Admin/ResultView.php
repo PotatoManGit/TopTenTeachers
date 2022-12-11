@@ -28,8 +28,10 @@ class ResultView extends Controller
 
         if(!empty($request['del']) && $request['del'] == '1')
         {
-            echo '<script language="JavaScript">;alert("此操作会删除全部评教记录!确实要删除吗");
-                    location.href="/admin/control?cmd=delAllEvaluationData";</script>;';
+            echo '<script language="JavaScript">
+                if(confirm("此操作会删除全部评教记录!确实要删除吗"))
+                    location.href="/admin/control?cmd=delAllEvaluationData";</script>';
+            echo '<script language="JavaScript">location.href="https://sjjs.xajdfz54.cn/admin/result_view"</script>';
             return 0;
         }
         if(empty($request['award']) || empty($request['num']))
