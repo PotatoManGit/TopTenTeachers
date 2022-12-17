@@ -59,15 +59,16 @@ class UserRegulate extends Controller
             Cache::forget('evaluation_user_list');
             Cache::forever('evaluation_user_list', $list);
             $evaluationStatus = Cache::get('evaluation_status');
-            if($evaluationStatus == 'run')
+            if($evaluationStatus != 1)
             {
-                return '<script language="JavaScript">;alert("此操作会删除用户除管理员数据和所有评教数据。确实要删除吗？");
-                    location.href="/admin/user_regulate/new_evaluation_user?step=2";</script>;';
+//                echo $evaluationStatus;
+                return '<script language="JavaScript">if(window.confirm("此操作会删除用户除管理员数据和所有评教数据。确实要删除吗？"))
+                    location.href="/admin/user_regulate/new_evaluation_user?step=2"; else location.href="/admin/user_regulate/"</script>';
             }
             else
             {
-                return '<script language="JavaScript">;alert("评教进行中执行此操作将会造成评教系统错误，点击确认停止评教");
-                    location.href="/admin/user_regulate/new_evaluation_user";</script>;';
+                echo '<script language="JavaScript">if(window.confirm("评教进行中执行此操作将会造成评教系统错误，点击确认停止评教"))
+                    location.href="/admin/user_regulate/"; else location.href="/admin/user_regulate/"</script>';
                 $make->evaluationStatus('stop');
             }
         }

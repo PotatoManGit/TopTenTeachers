@@ -1,27 +1,17 @@
 <!DOCTYPE html>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--
+____..--'.-./`)  ____     __   ___    _           .---.       ____    _______
+|        |\ .-.') \   \   /  /.'   |  | |          | ,_|     .'  __ `.\  ____  \
+|   .-'  '/ `-' \  \  _. /  ' |   .'  | |        ,-./  )    /   '  \  \ |    \ |
+|.-'.'   / `-'`"`   _( )_ .'  .'  '_  | |        \  '_ '`)  |___|  /  | |____/ /
+/   _/  .---.___(_ o _)'   '   ( \.-.|         > (_)  )     _.-`   |   _ _ '.
+.'._( )_  |   |   |(_,_)'    ' (`. _` /|        (  .  .-'  .'   _    |  ( ' )  \
+.'  (_'o._) |   |   `-'  /     | (_ (_) _)         `-'`-'|___|  _( )_  | (_{;}_) |
+|    (_,_)| |   |\      /       \ /  . \ /          |        \ (_ o _) /  (_,_)  /
+|_________| '---' `-..-'         ``-'`-''           `--------`'.(_,_).'/_______.'
+-->
 
 
 
@@ -206,7 +196,7 @@
 {{--</footer>--}}
 
 
-<script src="https://sjjs.xajdfz54.cn/jquery-3.6.1.min.js"></script>
+<script src="{{ @url('assets/js/jquery-3.6.1.min.js') }}" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </body>
 </html>
